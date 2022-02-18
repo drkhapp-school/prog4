@@ -16,9 +16,9 @@ namespace atelier3
       set
       {
         _radius = value;
-        _area = calculateArea(value);
-        _volume = calculateVolume(value);
-        _density = calculateDensity(_mass, value);
+        _area = CalculateArea(value);
+        _volume = CalculateVolume(value);
+        _density = CalculateDensity(_mass, value);
       }
     }
 
@@ -28,7 +28,7 @@ namespace atelier3
       set
       {
         _mass = value;
-        _density = calculateDensity(value, _radius);
+        _density = CalculateDensity(value, _radius);
       }
     }
 
@@ -59,44 +59,44 @@ namespace atelier3
       _name = name;
       _radius = radius;
       _mass = mass;
-      _area = calculateArea(radius);
-      _volume = calculateVolume(radius); 
-      _density = calculateDensity(mass, radius);
+      _area = CalculateArea(radius);
+      _volume = CalculateVolume(radius); 
+      _density = CalculateDensity(mass, radius);
     }
 
-    public Planet getLargestPlanet(Planet a, Planet b)
+    public Planet GetLargestPlanet(Planet a, Planet b)
     {
       return a._volume > b._volume ? a : b;
     }
 
-    public Planet getMostDensePlanet(Planet a, Planet b)
+    public Planet GetMostDensePlanet(Planet a, Planet b)
     {
       return a._density > b._density ? a : b;
     }
 
-    public bool isDuplicatePlanet(Planet a, Planet b)
+    public bool IsDuplicatePlanet(Planet a, Planet b)
     {
       return a._name == b._name && a._radius == b._radius && a._mass == b._mass;
     }
 
-    public int comparePlanets(Planet a, Planet b)
+    public int ComparePlanets(Planet a, Planet b)
     {
       return a._radius.CompareTo(b._radius);
     }
 
-    private double calculateVolume(int radius)
+    private double CalculateVolume(int radius)
     {
       return 4.0 / 3.0 * Math.PI * Math.Pow(radius, 3);
     }
     
-    private double calculateArea(int radius)
+    private double CalculateArea(int radius)
     {
       return 4 * Math.PI * Math.Pow(radius, 2);
     }
     
-    private double calculateDensity(float mass, int radius)
+    private double CalculateDensity(float mass, int radius)
     {
-      return mass / calculateVolume(radius);
+      return mass / CalculateVolume(radius);
     }
   }
 }
