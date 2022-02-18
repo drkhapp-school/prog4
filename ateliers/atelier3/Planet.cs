@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace atelier3
 {
@@ -10,7 +11,7 @@ namespace atelier3
       set => _name = value;
     }
 
-    public int Radius
+    public double Radius
     {
       get => _radius;
       set
@@ -22,7 +23,7 @@ namespace atelier3
       }
     }
 
-    public float Mass
+    public double Mass
     {
       get => _mass;
       set
@@ -42,31 +43,30 @@ namespace atelier3
       get => _volume;
     }
 
-    public double Density
-    {
-      get => _density;
-    }
+    public double Density =>
+      // Density is measured in g/cm^3, however we store Density in earthMass/km^3.
+      CalculateDensity(_mass * 5.972e27, _radius * 1e5);
 
     private string _name;
-    private int _radius;
-    private float _mass;
-    private double _area;
+    private double _radius;
+    private double _mass;
     private double _volume;
+    private double _area;
     private double _density;
 
-    public Planet(string name, int radius, float mass)
+    public Planet(string name, double radius, double mass)
     {
-      _name = name;
+      Name = name;
       _radius = radius;
       _mass = mass;
       _area = CalculateArea(radius);
-      _volume = CalculateVolume(radius); 
+      _volume = CalculateVolume(radius);
       _density = CalculateDensity(mass, radius);
     }
 
     public Planet GetLargestPlanet(Planet a, Planet b)
     {
-      return a._volume > b._volume ? a : b;
+      return a.Volume > b.Volume ? a : b;
     }
 
     public Planet GetMostDensePlanet(Planet a, Planet b)
@@ -76,7 +76,7 @@ namespace atelier3
 
     public bool IsDuplicatePlanet(Planet a, Planet b)
     {
-      return a._name == b._name && a._radius == b._radius && a._mass == b._mass;
+      return Equals(a._name, b._name) && Equals(a._radius, b._radius) && Equals(a._mass, b._mass);
     }
 
     public int ComparePlanets(Planet a, Planet b)
@@ -84,17 +84,17 @@ namespace atelier3
       return a._radius.CompareTo(b._radius);
     }
 
-    private double CalculateVolume(int radius)
+    private double CalculateVolume(double radius)
     {
       return 4.0 / 3.0 * Math.PI * Math.Pow(radius, 3);
     }
-    
-    private double CalculateArea(int radius)
+
+    private double CalculateArea(double radius)
     {
       return 4 * Math.PI * Math.Pow(radius, 2);
     }
-    
-    private double CalculateDensity(float mass, int radius)
+
+    private double CalculateDensity(double mass, double radius)
     {
       return mass / CalculateVolume(radius);
     }
