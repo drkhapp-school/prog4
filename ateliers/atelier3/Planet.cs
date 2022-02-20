@@ -1,10 +1,10 @@
 using System;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace atelier3
 {
   public class Planet
   {
+    private const double EarthMass = 5.9722e27;
     public string Name
     {
       get => _name;
@@ -43,9 +43,13 @@ namespace atelier3
       get => _volume;
     }
 
-    public double Density =>
-      // Density is measured in g/cm^3, however we store Density in earthMass/km^3.
-      CalculateDensity(_mass * 5.972e27, _radius * 1e5);
+    public double Density
+    {
+      get =>
+
+        // Density is measured in g/cm^3, however we store Density in earthMass/km^3.
+        _density;
+    }
 
     private string _name;
     private double _radius;
@@ -57,11 +61,8 @@ namespace atelier3
     public Planet(string name, double radius, double mass)
     {
       Name = name;
-      _radius = radius;
-      _mass = mass;
-      _area = CalculateArea(radius);
-      _volume = CalculateVolume(radius);
-      _density = CalculateDensity(mass, radius);
+      Radius = radius;
+      Mass = mass;
     }
 
     public Planet GetLargestPlanet(Planet a, Planet b)
@@ -96,7 +97,14 @@ namespace atelier3
 
     private double CalculateDensity(double mass, double radius)
     {
-      return mass / CalculateVolume(radius);
+      return mass * EarthMass / CalculateVolume(radius * 1e5);
+    }
+
+    public override string ToString()
+    {
+      // By default, ToString will return easy to read numbers.
+      return
+        $"{nameof(Name)}: {Name}, {nameof(Radius)}: {Radius:F}km, {nameof(Mass)}: {Mass:F}ME, {nameof(Area)}: {Area:G}km2, {nameof(Volume)}: {Volume:G}km3, {nameof(Density)}: {Density:F}g/cm3";
     }
   }
 }
