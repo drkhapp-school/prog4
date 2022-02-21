@@ -2,15 +2,28 @@ using System;
 
 namespace atelier3
 {
+  /// <summary>
+  /// Represents a planet.
+  /// </summary>
   public class Planet
   {
+    /// <summary>
+    /// Represents the equivalent of 1 Earth Mass in <c>kg</c>.
+    /// </summary>
     private const double EarthMass = 5.9722e27;
+
+    /// <summary>
+    /// Represents the planet's name.
+    /// </summary>
     public string Name
     {
       get => _name;
       set => _name = value;
     }
 
+    /// <value>
+    /// Represents the planet's radius in <c>km</c>.
+    /// </value>
     public double Radius
     {
       get => _radius;
@@ -23,6 +36,10 @@ namespace atelier3
       }
     }
 
+    /// <value>
+    /// Represents the planet's mass in <c>Earth Mass</c>.
+    /// The value of 1 Earth Mass is <c>5.9722e27</c>.
+    /// </value>
     public double Mass
     {
       get => _mass;
@@ -33,31 +50,67 @@ namespace atelier3
       }
     }
 
+    /// <value>
+    /// Represents the planet's area in <c>km^2</c>.
+    /// </value>
     public double Area
     {
       get => _area;
     }
 
+    /// <value>
+    /// Represents the planet's volume in <c>km^3</c>.
+    /// </value>
     public double Volume
     {
       get => _volume;
     }
 
+    /// <value>
+    /// Represents the planet's density in <c>g/cm^3</c>.
+    /// </value>
     public double Density
     {
       get =>
-
-        // Density is measured in g/cm^3, however we store Density in earthMass/km^3.
         _density;
     }
 
+    /// <summary>
+    /// Represents the name of the planet.
+    /// </summary>
     private string _name;
+
+    /// <summary>
+    /// Represents the radius of the planet.
+    /// </summary>
     private double _radius;
+
+    /// <summary>
+    /// Represents the mass of the planet.
+    /// </summary>
     private double _mass;
+
+    /// <summary>
+    /// Represents the volume of the planet.
+    /// </summary>
     private double _volume;
+
+    /// <summary>
+    /// Represents the area of the planet.
+    /// </summary>
     private double _area;
+
+    /// <summary>
+    /// Represents the density of the planet.
+    /// </summary>
     private double _density;
 
+    /// <summary>
+    /// Initializes a new planet.
+    /// </summary>
+    /// <param name="name"> the new planet's name.</param>
+    /// <param name="radius"> the new planet's radius, in km.</param>
+    /// <param name="mass"> the new planet's mass, in Earth Mass.</param>
     public Planet(string name, double radius, double mass)
     {
       Name = name;
@@ -65,46 +118,94 @@ namespace atelier3
       Mass = mass;
     }
 
-    public Planet GetLargestPlanet(Planet a, Planet b)
+    /// <summary>
+    /// Determines which of two Planets has the largest radius.
+    /// </summary>
+    /// <param name="value"> the object to be compared to the current object.</param>
+    /// <returns>Planet object that is the largest.</returns>
+    public Planet GetLargestPlanet(Planet value)
     {
-      return a.Volume > b.Volume ? a : b;
+      return _volume > value._volume ? this : value;
     }
 
-    public Planet GetMostDensePlanet(Planet a, Planet b)
+    /// <summary>
+    /// Determines which of two Planets is the most dense.
+    /// </summary>
+    /// <param name="value"> the object to be compared to the current object.</param>
+    /// <returns>Planet object that is the most dense.</returns>
+    public Planet GetMostDensePlanet(Planet value)
     {
-      return a._density > b._density ? a : b;
+      return _density > value._density ? this : value;
     }
 
-    public bool IsDuplicatePlanet(Planet a, Planet b)
+    /// <summary>
+    /// Determines whether two Planets have the same radius and mass. 
+    /// </summary>
+    /// <param name="value"> the object to be compared to the current object.</param>
+    /// <returns>True if the Planets have the same radius and mass; otherwise, false.</returns>
+    public bool Equals(Planet value)
     {
-      return Equals(a._name, b._name) && Equals(a._radius, b._radius) && Equals(a._mass, b._mass);
+      return Equals(_radius, value._radius) && Equals(_mass, value._mass);
     }
 
-    public int ComparePlanets(Planet a, Planet b)
+    /// <summary>
+    /// Determines whether a planet has a smaller, equal or larger radius compared to another planet. 
+    /// </summary>
+    /// <param name="value"> the object to be compared to the current object.</param>
+    /// <returns>
+    /// -1 if the current planet is smaller;
+    /// 0 if both planets are equal;
+    /// 1 if the current planet is bigger;
+    /// </returns>
+    public int CompareTo(Planet value)
     {
-      return a._radius.CompareTo(b._radius);
+      return _radius.CompareTo(value._radius);
     }
 
+    /// <summary>
+    /// Calculates the volume of a sphere.
+    /// </summary>
+    /// <param name="radius">The radius of the sphere to calculate.</param>
+    /// <returns>Double representing the volume.</returns>
     private double CalculateVolume(double radius)
     {
       return 4.0 / 3.0 * Math.PI * Math.Pow(radius, 3);
     }
 
+    /// <summary>
+    /// Calculates the area of a sphere.
+    /// </summary>
+    /// <param name="radius">The radius of the sphere to calculate.</param>
+    /// <returns>Double representing the area.</returns>
     private double CalculateArea(double radius)
     {
       return 4 * Math.PI * Math.Pow(radius, 2);
     }
 
+    /// <summary>
+    /// Calculates the density of a planet.
+    /// </summary>
+    /// <param name="mass">The mass of the planet.</param>
+    /// <param name="radius">The radius of the planet.</param>
+    /// <returns>Double representing the density.</returns>
     private double CalculateDensity(double mass, double radius)
     {
       return mass * EarthMass / CalculateVolume(radius * 1e5);
     }
 
+    /// <summary>
+    /// Reports the statistics of a planet.
+    /// </summary>
+    /// <returns>String representing all the properties of a planet, in the form <code>Property: Value,</code>, with it's appropriate unit.</returns>
     public override string ToString()
     {
-      // By default, ToString will return easy to read numbers.
       return
-        $"{nameof(Name)}: {Name}, {nameof(Radius)}: {Radius:F}km, {nameof(Mass)}: {Mass:F}ME, {nameof(Area)}: {Area:G}km2, {nameof(Volume)}: {Volume:G}km3, {nameof(Density)}: {Density:F}g/cm3";
+        $"{nameof(Name)}: {Name}, " +
+        $"{nameof(Radius)}: {Radius:N2}km, " +
+        $"{nameof(Mass)}: {Mass:N2}ME, " +
+        $"{nameof(Area)}: {Area:G2}km2, " +
+        $"{nameof(Volume)}: {Volume:G2}km3, " +
+        $"{nameof(Density)}: {Density:F2}g/cm3";
     }
   }
 }
