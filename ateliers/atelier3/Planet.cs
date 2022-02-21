@@ -13,15 +13,40 @@ namespace atelier3
     private const double EarthMass = 5.9722e27;
 
     /// <summary>
+    ///   Represents a unique identifier for a Planet.
+    /// </summary>
+    private readonly Guid _id;
+
+    /// <summary>
+    ///   Represents the planet's area in <c>km^2</c>.
+    /// </summary>
+    /// <remarks>A value of -1 means an unknown area, due to an unknown radius.</remarks>
+    private double? _area;
+
+    /// <summary>
+    ///   Represents the planet's density in <c>g/cm^3</c>.
+    /// </summary>
+    /// <remarks>A value of -1 means an unknown density, due to an unknown mass or radius.</remarks>
+    private double? _density;
+
+    /// <summary>
     ///   Represents the planet's mass in <c>Earth Mass</c>.
     ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
     /// </summary>
-    private double _mass;
+    /// <remarks>A value of -1 means an unknown mass.</remarks>
+    private double? _mass;
 
     /// <summary>
     ///   Represents the planet's radius in <c>km</c>.
     /// </summary>
-    private double _radius;
+    /// <remarks>A value of -1 means an unknown radius.</remarks>
+    private double? _radius;
+
+    /// <summary>
+    ///   Represents the planet's volume in <c>km^3</c>.
+    /// </summary>
+    /// <remarks>A value of -1 means an unknown volume, due to an unknown radius.</remarks>
+    private double? _volume;
 
     /// <summary>
     ///   Initializes a new planet.
@@ -32,9 +57,22 @@ namespace atelier3
     /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> or <c>mass</c> is lesser or equal to zero.</exception>
     public Planet(string name, double radius, double mass)
     {
+      _id = Guid.NewGuid();
       Name = name;
       Radius = radius;
       Mass = mass;
+    }
+
+    /// <summary>
+    ///   Initializes a new planet with an unknown radius and mass.
+    /// </summary>
+    /// <param name="name"> the new planet's name.</param>
+    public Planet(string name)
+    {
+      _id = Guid.NewGuid();
+      Name = name;
+      Radius = null;
+      Mass = null;
     }
 
     /// <summary>
@@ -42,23 +80,24 @@ namespace atelier3
     /// </summary>
     public string Name { get; set; }
 
-    ///<summary>
+    /// <summary>
     ///   Represents the planet's radius in <c>km</c>.
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> is lesser or equal to zero.</exception>
-    public double Radius
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> is lesser or equal to zero, and is not null.</exception>
+    /// <remarks>A value of -1 means an unknown radius.</remarks>
+    public double? Radius
     {
-      get => _radius;
+      get => _radius ?? -1;
       set
       {
         if (value <= 0)
-        {
-          throw new ArgumentOutOfRangeException(nameof(value),"Radius must be greater than 0km.");
-        }
-        _radius = value;
-        Area = CalculateArea(value);
-        Volume = CalculateVolume(value);
-        Density = CalculateDensity(_mass, value);
+          throw new ArgumentOutOfRangeException(nameof(value),
+            "Radius must be greater than 0km. Use null if you want to clear the radius.");
+
+        _radius = value ?? -1;
+        _area = CalculateArea(value);
+        _volume = CalculateVolume(value);
+        _density = CalculateDensity(_mass, value);
       }
     }
 
@@ -66,41 +105,52 @@ namespace atelier3
     ///   Represents the planet's mass in <c>Earth Mass</c>.
     ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>mass</c> is lesser or equal to zero.</exception>
-    public double Mass
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>mass</c> is lesser or equal to zero, and is not null.</exception>
+    /// <remarks>A value of -1 means an unknown mass.</remarks>
+    public double? Mass
     {
-      get => _mass;
+      get => _mass ?? -1;
       set
       {
-        if (value <= 0)
+        // Setting the radius to null will clear all properties that require the radius.
+        if (!value.HasValue)
         {
-          throw new ArgumentOutOfRangeException(nameof(value), "Mass must be greater than 0ME.");
+          _mass = null;
+          _density = null;
+          return;
         }
+
+        if (value <= 0)
+          throw new ArgumentOutOfRangeException(nameof(value), "Mass must be greater than 0ME.");
+
         _mass = value;
-        Density = CalculateDensity(value, _radius);
+        if (_radius.HasValue) _density = CalculateDensity((double) value, (double) _radius);
       }
     }
 
     /// <summary>
     ///   Represents the planet's area in <c>km^2</c>.
     /// </summary>
-    public double Area { get; private set; }
+    /// <remarks>A value of -1 means an unknown area, due to an unknown radius.</remarks>
+    public double? Area => _area ?? -1;
 
     /// <summary>
     ///   Represents the planet's volume in <c>km^3</c>.
     /// </summary>
-    public double Volume { get; private set; }
+    /// <remarks>A value of -1 means an unknown volume, due to an unknown radius.</remarks>
+    public double? Volume => _volume ?? -1;
 
     /// <summary>
     ///   Represents the planet's density in <c>g/cm^3</c>.
     /// </summary>
-    public double Density { get; private set; }
+    /// <remarks>A value of -1 means an unknown density, due to an unknown mass or radius.</remarks>
+    public double? Density => _density ?? -1;
 
     /// <summary>
     ///   Determines which of two Planets has the largest radius.
     /// </summary>
-    /// <param name="value"> the object to be compared to the current object.</param>
-    /// <returns>Planet object that is the largest.</returns>
+    /// <param name="value"> The Planet to be compared to the current Planet.</param>
+    /// <returns>The Planet that is the largest.</returns>
     public Planet GetLargestPlanet(Planet value)
     {
       return Volume > value.Volume ? this : value;
@@ -109,27 +159,39 @@ namespace atelier3
     /// <summary>
     ///   Determines which of two Planets is the most dense.
     /// </summary>
-    /// <param name="value"> the object to be compared to the current object.</param>
-    /// <returns>Planet object that is the most dense.</returns>
+    /// <param name="value"> The Planet to be compared to the current Planet.</param>
+    /// <returns>The Planet that is the most dense.</returns>
     public Planet GetMostDensePlanet(Planet value)
     {
       return Density > value.Density ? this : value;
     }
 
     /// <summary>
-    ///   Determines whether two Planets have the same radius and mass.
+    ///   Determines whether the specified planet has the same name, radius and mass as the current planet.
     /// </summary>
-    /// <param name="value"> the object to be compared to the current object.</param>
-    /// <returns>True if the Planets have the same radius and mass; otherwise, false.</returns>
-    public bool Equals(Planet value)
+    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
+    /// <returns>True if the Planets have the same name, radius and mass; otherwise, false.</returns>
+    public override bool Equals(object obj)
     {
-      return Equals(_radius, value._radius) && Equals(_mass, value._mass);
+      if (ReferenceEquals(null, obj)) return false;
+      if (ReferenceEquals(this, obj)) return true;
+      return obj.GetType() == GetType() && Equals((Planet) obj);
+    }
+
+    public override int GetHashCode()
+    {
+      return _id.GetHashCode();
+    }
+
+    private bool Equals(Planet other)
+    {
+      return Mass.Equals(other.Mass) && Radius.Equals(other.Radius) && Name.Equals(other.Name);
     }
 
     /// <summary>
     ///   Determines whether a planet has a smaller, equal or larger radius compared to another planet.
     /// </summary>
-    /// <param name="value"> the object to be compared to the current object.</param>
+    /// <param name="value"> The Planet to be compared to the current Planet.</param>
     /// <returns>
     ///   -1 if the current planet is smaller;
     ///   0 if both planets are equal;
@@ -137,27 +199,29 @@ namespace atelier3
     /// </returns>
     public int CompareTo(Planet value)
     {
-      return _radius.CompareTo(value._radius);
+      if (!_radius.HasValue || !value._radius.HasValue)
+        throw new ArgumentNullException(nameof(value), "Cannot compare a planet with an unknown radius.");
+      return Nullable.Compare(_radius, value._radius);
     }
 
     /// <summary>
     ///   Calculates the volume of a sphere.
     /// </summary>
     /// <param name="radius">The radius of the sphere to calculate.</param>
-    /// <returns>Double representing the volume.</returns>
-    private static double CalculateVolume(double radius)
+    /// <returns>Double representing the volume, or -1 if the radius is null.</returns>
+    private static double CalculateVolume(double? radius)
     {
-      return 4.0 / 3.0 * Math.PI * Math.Pow(radius, 3);
+      return radius.HasValue ? 4.0 / 3.0 * Math.PI * Math.Pow((double) radius, 3) : -1;
     }
 
     /// <summary>
     ///   Calculates the area of a sphere.
     /// </summary>
     /// <param name="radius">The radius of the sphere to calculate.</param>
-    /// <returns>Double representing the area.</returns>
-    private static double CalculateArea(double radius)
+    /// <returns>Double representing the area, or -1 if the radius is null.</returns>
+    private static double CalculateArea(double? radius)
     {
-      return 4 * Math.PI * Math.Pow(radius, 2);
+      return radius.HasValue ? 4 * Math.PI * Math.Pow((double) radius, 2) : -1;
     }
 
     /// <summary>
@@ -165,10 +229,12 @@ namespace atelier3
     /// </summary>
     /// <param name="mass">The mass of the planet.</param>
     /// <param name="radius">The radius of the planet.</param>
-    /// <returns>Double representing the density.</returns>
-    private double CalculateDensity(double mass, double radius)
+    /// <returns>Double representing the density, or -1 if any parameter is null.</returns>
+    private double CalculateDensity(double? mass, double? radius)
     {
-      return mass * EarthMass / CalculateVolume(radius * 1e5);
+      return mass.HasValue && radius.HasValue
+        ? (double) mass * EarthMass / CalculateVolume(radius * 1e5)
+        : -1;
     }
 
     /// <summary>

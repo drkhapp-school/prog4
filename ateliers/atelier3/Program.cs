@@ -16,15 +16,8 @@ namespace atelier3
       var uranus = new Planet("Uranus", 25362, 14.54);
       var pluto = new Planet("Pluto", 1188.3, 0.00218);
 
-      Console.WriteLine(mercury.ToString());
-      Console.WriteLine(venus.ToString());
-      Console.WriteLine(earth.ToString());
-      Console.WriteLine(mars.ToString());
-      Console.WriteLine(jupiter.ToString());
-      Console.WriteLine(saturn.ToString());
-      Console.WriteLine(neptune.ToString());
-      Console.WriteLine(uranus.ToString());
-      Console.WriteLine(pluto.ToString());
+      Planet[] cute = {pluto, uranus, earth};
+      foreach (var planet in cute) Console.WriteLine(planet);
 
       Console.WriteLine("-----");
 
@@ -50,7 +43,18 @@ namespace atelier3
           break;
       }
 
-      Console.WriteLine("Cool is " + (cool.Equals(earth) ? "equal" : "not equal") + " to earth.");
+      Console.WriteLine("Cool is " + (Equals(cool, earth) ? "equal" : "not equal") + " to earth.");
+      
+      Console.WriteLine("Nullable test.");
+      cool.Mass = null;
+      Console.WriteLine("Null mass: " + cool);
+      cool.Mass = 2;
+      Console.WriteLine("+2 mass: " + cool);
+      cool.Radius = null;
+      Console.WriteLine("Null radius: " + cool);
+      cool.Radius = 2;
+      Console.WriteLine("+2 radius: " + cool);
+      Console.WriteLine("New planet: " + new Planet("testsubject"));
     }
   }
 }
