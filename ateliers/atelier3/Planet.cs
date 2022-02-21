@@ -13,34 +13,15 @@ namespace atelier3
     private const double EarthMass = 5.9722e27;
 
     /// <summary>
-    ///   Represents the area of the planet.
-    /// </summary>
-    private double _area;
-
-    /// <summary>
-    ///   Represents the density of the planet.
-    /// </summary>
-    private double _density;
-
-    /// <summary>
-    ///   Represents the mass of the planet.
+    ///   Represents the planet's mass in <c>Earth Mass</c>.
+    ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
     /// </summary>
     private double _mass;
 
     /// <summary>
-    ///   Represents the name of the planet.
-    /// </summary>
-    private string _name;
-
-    /// <summary>
-    ///   Represents the radius of the planet.
+    ///   Represents the planet's radius in <c>km</c>.
     /// </summary>
     private double _radius;
-
-    /// <summary>
-    ///   Represents the volume of the planet.
-    /// </summary>
-    private double _volume;
 
     /// <summary>
     ///   Initializes a new planet.
@@ -48,6 +29,7 @@ namespace atelier3
     /// <param name="name"> the new planet's name.</param>
     /// <param name="radius"> the new planet's radius, in km.</param>
     /// <param name="mass"> the new planet's mass, in Earth Mass.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> or <c>mass</c> is lesser or equal to zero.</exception>
     public Planet(string name, double radius, double mass)
     {
       Name = name;
@@ -58,64 +40,61 @@ namespace atelier3
     /// <summary>
     ///   Represents the planet's name.
     /// </summary>
-    public string Name
-    {
-      get => _name;
-      set => _name = value;
-    }
+    public string Name { get; set; }
 
-    /// <value>
+    ///<summary>
     ///   Represents the planet's radius in <c>km</c>.
-    /// </value>
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> is lesser or equal to zero.</exception>
     public double Radius
     {
       get => _radius;
       set
       {
+        if (value <= 0)
+        {
+          throw new ArgumentOutOfRangeException(nameof(value),"Radius must be greater than 0km.");
+        }
         _radius = value;
-        _area = CalculateArea(value);
-        _volume = CalculateVolume(value);
-        _density = CalculateDensity(_mass, value);
+        Area = CalculateArea(value);
+        Volume = CalculateVolume(value);
+        Density = CalculateDensity(_mass, value);
       }
     }
 
-    /// <value>
+    /// <summary>
     ///   Represents the planet's mass in <c>Earth Mass</c>.
     ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
-    /// </value>
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>mass</c> is lesser or equal to zero.</exception>
     public double Mass
     {
       get => _mass;
       set
       {
+        if (value <= 0)
+        {
+          throw new ArgumentOutOfRangeException(nameof(value), "Mass must be greater than 0ME.");
+        }
         _mass = value;
-        _density = CalculateDensity(value, _radius);
+        Density = CalculateDensity(value, _radius);
       }
     }
 
-    /// <value>
+    /// <summary>
     ///   Represents the planet's area in <c>km^2</c>.
-    /// </value>
-    public double Area
-    {
-      get => _area;
-    }
+    /// </summary>
+    public double Area { get; private set; }
 
-    /// <value>
+    /// <summary>
     ///   Represents the planet's volume in <c>km^3</c>.
-    /// </value>
-    public double Volume
-    {
-      get => _volume;
-    }
+    /// </summary>
+    public double Volume { get; private set; }
 
-    /// <value>
+    /// <summary>
     ///   Represents the planet's density in <c>g/cm^3</c>.
-    /// </value>
-    public double Density
-    {
-      get => _density; 
-    }
+    /// </summary>
+    public double Density { get; private set; }
 
     /// <summary>
     ///   Determines which of two Planets has the largest radius.
@@ -124,7 +103,7 @@ namespace atelier3
     /// <returns>Planet object that is the largest.</returns>
     public Planet GetLargestPlanet(Planet value)
     {
-      return _volume > value._volume ? this : value;
+      return Volume > value.Volume ? this : value;
     }
 
     /// <summary>
@@ -134,7 +113,7 @@ namespace atelier3
     /// <returns>Planet object that is the most dense.</returns>
     public Planet GetMostDensePlanet(Planet value)
     {
-      return _density > value._density ? this : value;
+      return Density > value.Density ? this : value;
     }
 
     /// <summary>
@@ -166,7 +145,7 @@ namespace atelier3
     /// </summary>
     /// <param name="radius">The radius of the sphere to calculate.</param>
     /// <returns>Double representing the volume.</returns>
-    private double CalculateVolume(double radius)
+    private static double CalculateVolume(double radius)
     {
       return 4.0 / 3.0 * Math.PI * Math.Pow(radius, 3);
     }
@@ -176,7 +155,7 @@ namespace atelier3
     /// </summary>
     /// <param name="radius">The radius of the sphere to calculate.</param>
     /// <returns>Double representing the area.</returns>
-    private double CalculateArea(double radius)
+    private static double CalculateArea(double radius)
     {
       return 4 * Math.PI * Math.Pow(radius, 2);
     }

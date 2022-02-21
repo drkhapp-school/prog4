@@ -15,6 +15,7 @@ namespace atelier3
       var neptune = new Planet("Neptune", 24622, 17.15);
       var uranus = new Planet("Uranus", 25362, 14.54);
       var pluto = new Planet("Pluto", 1188.3, 0.00218);
+      var voidPlanet = new Planet("Void", 0, 0);
 
       Console.WriteLine(mercury.ToString());
       Console.WriteLine(venus.ToString());
