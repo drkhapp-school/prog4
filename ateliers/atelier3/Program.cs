@@ -16,7 +16,8 @@ namespace atelier3
       var uranus = new Planet("Uranus", 25362, 14.54);
       var pluto = new Planet("Pluto", 1188.3, 0.00218);
 
-      Planet[] cute = {pluto, uranus, earth};
+      Planet[] cute = {mercury, venus, earth, mars, jupiter, saturn, neptune, uranus, pluto};
+      Array.Sort(cute);
       foreach (var planet in cute) Console.WriteLine(planet);
 
       Console.WriteLine("-----");

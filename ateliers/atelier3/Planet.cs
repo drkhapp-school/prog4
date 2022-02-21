@@ -1,16 +1,17 @@
 using System;
+using System.Security;
 
 namespace atelier3
 {
   /// <summary>
   ///   Represents a planet.
   /// </summary>
-  public class Planet
+  public class Planet : IComparable
   {
     /// <summary>
     ///   Represents the equivalent of 1 Earth Mass in <c>kg</c>.
     /// </summary>
-    private const double EarthMass = 5.9722e27;
+    public const double EarthMass = 5.9722e27;
 
     /// <summary>
     ///   Represents a unique identifier for a Planet.
@@ -189,18 +190,24 @@ namespace atelier3
     }
 
     /// <summary>
-    ///   Determines whether a planet has a smaller, equal or larger radius compared to another planet.
+    ///   <para>Compares the current Planet with another Planet and returns an integer that indicates whether the current Planet precedes, follows, or occurs in the same position in the sort order as the other object.</para>
+    /// <para>Planets are sorted by their radius.</para>
     /// </summary>
-    /// <param name="value"> The Planet to be compared to the current Planet.</param>
+    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
     /// <returns>
     ///   -1 if the current planet is smaller;
     ///   0 if both planets are equal;
     ///   1 if the current planet is bigger;
     /// </returns>
-    public int CompareTo(Planet value)
+    public int CompareTo(object obj)
     {
-      if (!_radius.HasValue || !value._radius.HasValue)
-        throw new ArgumentNullException(nameof(value), "Cannot compare a planet with an unknown radius.");
+      if (obj == null) return 1;
+      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a planet to another type of object.");
+      return CompareTo((Planet) obj);
+    }
+
+    private int CompareTo(Planet value)
+    {
       return Nullable.Compare(_radius, value._radius);
     }
 
@@ -230,7 +237,7 @@ namespace atelier3
     /// <param name="mass">The mass of the planet.</param>
     /// <param name="radius">The radius of the planet.</param>
     /// <returns>Double representing the density, or -1 if any parameter is null.</returns>
-    private double CalculateDensity(double? mass, double? radius)
+    private static double CalculateDensity(double? mass, double? radius)
     {
       return mass.HasValue && radius.HasValue
         ? (double) mass * EarthMass / CalculateVolume(radius * 1e5)
