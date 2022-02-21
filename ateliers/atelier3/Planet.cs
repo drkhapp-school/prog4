@@ -1,5 +1,4 @@
 using System;
-using System.Security;
 
 namespace atelier3
 {
@@ -19,18 +18,6 @@ namespace atelier3
     private readonly Guid _id;
 
     /// <summary>
-    ///   Represents the planet's area in <c>km^2</c>.
-    /// </summary>
-    /// <remarks>A value of -1 means an unknown area, due to an unknown radius.</remarks>
-    private double? _area;
-
-    /// <summary>
-    ///   Represents the planet's density in <c>g/cm^3</c>.
-    /// </summary>
-    /// <remarks>A value of -1 means an unknown density, due to an unknown mass or radius.</remarks>
-    private double? _density;
-
-    /// <summary>
     ///   Represents the planet's mass in <c>Earth Mass</c>.
     ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
     /// </summary>
@@ -42,12 +29,6 @@ namespace atelier3
     /// </summary>
     /// <remarks>A value of -1 means an unknown radius.</remarks>
     private double? _radius;
-
-    /// <summary>
-    ///   Represents the planet's volume in <c>km^3</c>.
-    /// </summary>
-    /// <remarks>A value of -1 means an unknown volume, due to an unknown radius.</remarks>
-    private double? _volume;
 
     /// <summary>
     ///   Initializes a new planet.
@@ -96,9 +77,6 @@ namespace atelier3
             "Radius must be greater than 0km. Use null if you want to clear the radius.");
 
         _radius = value ?? -1;
-        _area = CalculateArea(value);
-        _volume = CalculateVolume(value);
-        _density = CalculateDensity(_mass, value);
       }
     }
 
@@ -113,19 +91,10 @@ namespace atelier3
       get => _mass ?? -1;
       set
       {
-        // Setting the radius to null will clear all properties that require the radius.
-        if (!value.HasValue)
-        {
-          _mass = null;
-          _density = null;
-          return;
-        }
-
         if (value <= 0)
           throw new ArgumentOutOfRangeException(nameof(value), "Mass must be greater than 0ME.");
 
-        _mass = value;
-        if (_radius.HasValue) _density = CalculateDensity((double) value, (double) _radius);
+        _mass = value ?? -1;
       }
     }
 
@@ -133,19 +102,19 @@ namespace atelier3
     ///   Represents the planet's area in <c>km^2</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown area, due to an unknown radius.</remarks>
-    public double? Area => _area ?? -1;
+    public double Area => CalculateArea(_radius);
 
     /// <summary>
     ///   Represents the planet's volume in <c>km^3</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown volume, due to an unknown radius.</remarks>
-    public double? Volume => _volume ?? -1;
+    public double Volume => CalculateVolume(_radius);
 
     /// <summary>
     ///   Represents the planet's density in <c>g/cm^3</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown density, due to an unknown mass or radius.</remarks>
-    public double? Density => _density ?? -1;
+    public double Density => CalculateDensity(_mass, _radius);
 
     /// <summary>
     ///   Determines which of two Planets has the largest radius.
