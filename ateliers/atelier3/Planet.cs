@@ -3,17 +3,60 @@ using System;
 namespace atelier3
 {
   /// <summary>
-  /// Represents a planet.
+  ///   Represents a planet.
   /// </summary>
   public class Planet
   {
     /// <summary>
-    /// Represents the equivalent of 1 Earth Mass in <c>kg</c>.
+    ///   Represents the equivalent of 1 Earth Mass in <c>kg</c>.
     /// </summary>
     private const double EarthMass = 5.9722e27;
 
     /// <summary>
-    /// Represents the planet's name.
+    ///   Represents the area of the planet.
+    /// </summary>
+    private double _area;
+
+    /// <summary>
+    ///   Represents the density of the planet.
+    /// </summary>
+    private double _density;
+
+    /// <summary>
+    ///   Represents the mass of the planet.
+    /// </summary>
+    private double _mass;
+
+    /// <summary>
+    ///   Represents the name of the planet.
+    /// </summary>
+    private string _name;
+
+    /// <summary>
+    ///   Represents the radius of the planet.
+    /// </summary>
+    private double _radius;
+
+    /// <summary>
+    ///   Represents the volume of the planet.
+    /// </summary>
+    private double _volume;
+
+    /// <summary>
+    ///   Initializes a new planet.
+    /// </summary>
+    /// <param name="name"> the new planet's name.</param>
+    /// <param name="radius"> the new planet's radius, in km.</param>
+    /// <param name="mass"> the new planet's mass, in Earth Mass.</param>
+    public Planet(string name, double radius, double mass)
+    {
+      Name = name;
+      Radius = radius;
+      Mass = mass;
+    }
+
+    /// <summary>
+    ///   Represents the planet's name.
     /// </summary>
     public string Name
     {
@@ -22,7 +65,7 @@ namespace atelier3
     }
 
     /// <value>
-    /// Represents the planet's radius in <c>km</c>.
+    ///   Represents the planet's radius in <c>km</c>.
     /// </value>
     public double Radius
     {
@@ -37,8 +80,8 @@ namespace atelier3
     }
 
     /// <value>
-    /// Represents the planet's mass in <c>Earth Mass</c>.
-    /// The value of 1 Earth Mass is <c>5.9722e27</c>.
+    ///   Represents the planet's mass in <c>Earth Mass</c>.
+    ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
     /// </value>
     public double Mass
     {
@@ -51,7 +94,7 @@ namespace atelier3
     }
 
     /// <value>
-    /// Represents the planet's area in <c>km^2</c>.
+    ///   Represents the planet's area in <c>km^2</c>.
     /// </value>
     public double Area
     {
@@ -59,7 +102,7 @@ namespace atelier3
     }
 
     /// <value>
-    /// Represents the planet's volume in <c>km^3</c>.
+    ///   Represents the planet's volume in <c>km^3</c>.
     /// </value>
     public double Volume
     {
@@ -67,59 +110,15 @@ namespace atelier3
     }
 
     /// <value>
-    /// Represents the planet's density in <c>g/cm^3</c>.
+    ///   Represents the planet's density in <c>g/cm^3</c>.
     /// </value>
     public double Density
     {
-      get =>
-        _density;
+      get => _density; 
     }
 
     /// <summary>
-    /// Represents the name of the planet.
-    /// </summary>
-    private string _name;
-
-    /// <summary>
-    /// Represents the radius of the planet.
-    /// </summary>
-    private double _radius;
-
-    /// <summary>
-    /// Represents the mass of the planet.
-    /// </summary>
-    private double _mass;
-
-    /// <summary>
-    /// Represents the volume of the planet.
-    /// </summary>
-    private double _volume;
-
-    /// <summary>
-    /// Represents the area of the planet.
-    /// </summary>
-    private double _area;
-
-    /// <summary>
-    /// Represents the density of the planet.
-    /// </summary>
-    private double _density;
-
-    /// <summary>
-    /// Initializes a new planet.
-    /// </summary>
-    /// <param name="name"> the new planet's name.</param>
-    /// <param name="radius"> the new planet's radius, in km.</param>
-    /// <param name="mass"> the new planet's mass, in Earth Mass.</param>
-    public Planet(string name, double radius, double mass)
-    {
-      Name = name;
-      Radius = radius;
-      Mass = mass;
-    }
-
-    /// <summary>
-    /// Determines which of two Planets has the largest radius.
+    ///   Determines which of two Planets has the largest radius.
     /// </summary>
     /// <param name="value"> the object to be compared to the current object.</param>
     /// <returns>Planet object that is the largest.</returns>
@@ -129,7 +128,7 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Determines which of two Planets is the most dense.
+    ///   Determines which of two Planets is the most dense.
     /// </summary>
     /// <param name="value"> the object to be compared to the current object.</param>
     /// <returns>Planet object that is the most dense.</returns>
@@ -139,7 +138,7 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Determines whether two Planets have the same radius and mass. 
+    ///   Determines whether two Planets have the same radius and mass.
     /// </summary>
     /// <param name="value"> the object to be compared to the current object.</param>
     /// <returns>True if the Planets have the same radius and mass; otherwise, false.</returns>
@@ -149,13 +148,13 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Determines whether a planet has a smaller, equal or larger radius compared to another planet. 
+    ///   Determines whether a planet has a smaller, equal or larger radius compared to another planet.
     /// </summary>
     /// <param name="value"> the object to be compared to the current object.</param>
     /// <returns>
-    /// -1 if the current planet is smaller;
-    /// 0 if both planets are equal;
-    /// 1 if the current planet is bigger;
+    ///   -1 if the current planet is smaller;
+    ///   0 if both planets are equal;
+    ///   1 if the current planet is bigger;
     /// </returns>
     public int CompareTo(Planet value)
     {
@@ -163,7 +162,7 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Calculates the volume of a sphere.
+    ///   Calculates the volume of a sphere.
     /// </summary>
     /// <param name="radius">The radius of the sphere to calculate.</param>
     /// <returns>Double representing the volume.</returns>
@@ -173,7 +172,7 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Calculates the area of a sphere.
+    ///   Calculates the area of a sphere.
     /// </summary>
     /// <param name="radius">The radius of the sphere to calculate.</param>
     /// <returns>Double representing the area.</returns>
@@ -183,7 +182,7 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Calculates the density of a planet.
+    ///   Calculates the density of a planet.
     /// </summary>
     /// <param name="mass">The mass of the planet.</param>
     /// <param name="radius">The radius of the planet.</param>
@@ -194,9 +193,12 @@ namespace atelier3
     }
 
     /// <summary>
-    /// Reports the statistics of a planet.
+    ///   Reports the statistics of a planet.
     /// </summary>
-    /// <returns>String representing all the properties of a planet, in the form <code>Property: Value,</code>, with it's appropriate unit.</returns>
+    /// <returns>
+    ///   String representing all the properties of a planet, in the form <code>Property: Value,</code>, with it's
+    ///   appropriate unit.
+    /// </returns>
     public override string ToString()
     {
       return
