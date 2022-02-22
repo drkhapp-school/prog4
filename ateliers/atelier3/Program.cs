@@ -45,7 +45,7 @@ namespace atelier3
       }
 
       Console.WriteLine("Cool is " + (Equals(cool, earth) ? "equal" : "not equal") + " to earth.");
-      
+
       Console.WriteLine("Nullable test.");
       cool.Mass = null;
       Console.WriteLine("Null mass: " + cool);

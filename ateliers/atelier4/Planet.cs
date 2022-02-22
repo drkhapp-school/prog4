@@ -19,16 +19,16 @@ namespace atelier4
     private readonly Guid _id;
 
     /// <summary>
+    ///   Represents the moons that orbits the planet.
+    /// </summary>
+    private readonly List<Moon> _moons;
+
+    /// <summary>
     ///   Represents the planet's mass in <c>Earth Mass</c>.
     ///   The value of 1 Earth Mass is <c>5.9722e27</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown mass.</remarks>
     private double? _mass;
-
-    /// <summary>
-    ///   Represents the moons that orbits the planet.
-    /// </summary>
-    private readonly List<Moon> _moons;
 
     /// <summary>
     ///   Represents the planet's radius in <c>km</c>.

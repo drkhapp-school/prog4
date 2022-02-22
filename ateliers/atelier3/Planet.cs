@@ -117,6 +117,26 @@ namespace atelier3
     public double Density => CalculateDensity(_mass, _radius);
 
     /// <summary>
+    ///   <para>
+    ///     Compares the current Planet with another Planet and returns an integer that indicates whether the current
+    ///     Planet precedes, follows, or occurs in the same position in the sort order as the other object.
+    ///   </para>
+    ///   <para>Planets are sorted by their radius.</para>
+    /// </summary>
+    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
+    /// <returns>
+    ///   -1 if the current planet is smaller;
+    ///   0 if both planets are equal;
+    ///   1 if the current planet is bigger;
+    /// </returns>
+    public int CompareTo(object obj)
+    {
+      if (obj == null) return 1;
+      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a planet to another type of object.");
+      return CompareTo((Planet) obj);
+    }
+
+    /// <summary>
     ///   Determines which of two Planets has the largest radius.
     /// </summary>
     /// <param name="value"> The Planet to be compared to the current Planet.</param>
@@ -156,23 +176,6 @@ namespace atelier3
     private bool Equals(Planet other)
     {
       return Mass.Equals(other.Mass) && Radius.Equals(other.Radius) && Name.Equals(other.Name);
-    }
-
-    /// <summary>
-    ///   <para>Compares the current Planet with another Planet and returns an integer that indicates whether the current Planet precedes, follows, or occurs in the same position in the sort order as the other object.</para>
-    /// <para>Planets are sorted by their radius.</para>
-    /// </summary>
-    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
-    /// <returns>
-    ///   -1 if the current planet is smaller;
-    ///   0 if both planets are equal;
-    ///   1 if the current planet is bigger;
-    /// </returns>
-    public int CompareTo(object obj)
-    {
-      if (obj == null) return 1;
-      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a planet to another type of object.");
-      return CompareTo((Planet) obj);
     }
 
     private int CompareTo(Planet value)

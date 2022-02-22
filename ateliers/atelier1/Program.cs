@@ -9,7 +9,7 @@ namespace atelier1
       // Question 7
       int x, y, z;
 
-      x = Int32.MaxValue;
+      x = int.MaxValue;
       y = x;
       z = x + y;
       Console.WriteLine(z);
