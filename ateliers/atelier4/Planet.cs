@@ -26,15 +26,15 @@ namespace atelier4
     private double? _mass;
 
     /// <summary>
+    ///   Represents the moons that orbits the planet.
+    /// </summary>
+    private readonly List<Moon> _moons;
+
+    /// <summary>
     ///   Represents the planet's radius in <c>km</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown radius.</remarks>
     private double? _radius;
-
-    /// <summary>
-    ///   Represents the moons that orbits the planet.
-    /// </summary>
-    private List<Moon> _moons;
 
     /// <summary>
     ///   Initializes a new planet.
@@ -49,6 +49,7 @@ namespace atelier4
       Name = name;
       Radius = radius;
       Mass = mass;
+      _moons = new List<Moon>();
     }
 
     /// <summary>
@@ -61,6 +62,7 @@ namespace atelier4
       Name = name;
       Radius = null;
       Mass = null;
+      _moons = new List<Moon>();
     }
 
     /// <summary>
@@ -128,6 +130,44 @@ namespace atelier4
     public List<Moon> Moons => _moons;
 
     /// <summary>
+    ///   <para>
+    ///     Compares the current Planet with another Planet and returns an integer that indicates whether the current
+    ///     Planet precedes, follows, or occurs in the same position in the sort order as the other object.
+    ///   </para>
+    ///   <para>Planets are sorted by their radius.</para>
+    /// </summary>
+    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
+    /// <returns>
+    ///   -1 if the current planet is smaller;
+    ///   0 if both planets are equal;
+    ///   1 if the current planet is bigger;
+    /// </returns>
+    public int CompareTo(object obj)
+    {
+      if (obj == null) return 1;
+      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a planet to another type of object.");
+      return CompareTo((Planet) obj);
+    }
+
+    /// <summary>
+    ///   Adds new moons to the planet.
+    /// </summary>
+    /// <param name="values">The moons to add.</param>
+    public void Add(params Moon[] values)
+    {
+      foreach (var value in values) _moons.Add(value);
+    }
+
+    /// <summary>
+    ///   Removes moons from the planet.
+    /// </summary>
+    /// <param name="values">The moons to remove.</param>
+    public void Remove(params Moon[] values)
+    {
+      foreach (var value in values) _moons.Remove(value);
+    }
+
+    /// <summary>
     ///   Determines which of two Planets has the largest radius.
     /// </summary>
     /// <param name="value"> The Planet to be compared to the current Planet.</param>
@@ -167,23 +207,6 @@ namespace atelier4
     private bool Equals(Planet other)
     {
       return Mass.Equals(other.Mass) && Radius.Equals(other.Radius) && Name.Equals(other.Name);
-    }
-
-    /// <summary>
-    ///   <para>Compares the current Planet with another Planet and returns an integer that indicates whether the current Planet precedes, follows, or occurs in the same position in the sort order as the other object.</para>
-    /// <para>Planets are sorted by their radius.</para>
-    /// </summary>
-    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
-    /// <returns>
-    ///   -1 if the current planet is smaller;
-    ///   0 if both planets are equal;
-    ///   1 if the current planet is bigger;
-    /// </returns>
-    public int CompareTo(object obj)
-    {
-      if (obj == null) return 1;
-      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a planet to another type of object.");
-      return CompareTo((Planet) obj);
     }
 
     private int CompareTo(Planet value)
@@ -240,6 +263,95 @@ namespace atelier4
         $"{nameof(Area)}: {Area:G2}km2, " +
         $"{nameof(Volume)}: {Volume:G2}km3, " +
         $"{nameof(Density)}: {Density:F2}g/cm3";
+    }
+
+
+    /// <summary>
+    ///   Compares two planet's radius.
+    /// </summary>
+    /// <param name="a">The first planet.</param>
+    /// <param name="b">The second planet.</param>
+    /// <returns>True if the first planet is smaller; otherwise false.</returns>
+    public static bool operator <(Planet a, Planet b)
+    {
+      return a._radius < b._radius;
+    }
+
+    /// <summary>
+    ///   Compares two planet's radius.
+    /// </summary>
+    /// <param name="a">The first planet.</param>
+    /// <param name="b">The second planet.</param>
+    /// <returns>True if the first planet is smaller or equal; otherwise false.</returns>
+    public static bool operator <=(Planet a, Planet b)
+    {
+      return a._radius <= b._radius;
+    }
+
+    /// <summary>Determines whether two planets are equal in name, radius and mass.</summary>
+    /// <param name="a">The first planet.</param>
+    /// <param name="b">The second planet.</param>
+    /// <returns>True if both planets are equal; otherwise false.</returns>
+    /// <seealso cref="Equals" />
+    public static bool operator ==(Planet a, Planet b)
+    {
+      return Equals(a, b);
+    }
+
+    /// <summary>Determines whether two planets are unequal in name, radius and mass.</summary>
+    /// <param name="a">The first planet.</param>
+    /// <param name="b">The second planet.</param>
+    /// <returns>True if both planets are unequal; otherwise false.</returns>
+    /// <seealso cref="Equals" />
+    public static bool operator !=(Planet a, Planet b)
+    {
+      return !Equals(a, b);
+    }
+
+    /// <summary>
+    ///   Compares two planet's radius.
+    /// </summary>
+    /// <param name="a">The first planet.</param>
+    /// <param name="b">The second planet.</param>
+    /// <returns>True if the first planet is larger or equal; otherwise false.</returns>
+    public static bool operator >=(Planet a, Planet b)
+    {
+      return a._radius >= b._radius;
+    }
+
+    /// <summary>
+    ///   Compares two planet's radius.
+    /// </summary>
+    /// <param name="a">The first planet.</param>
+    /// <param name="b">The second planet.</param>
+    /// <returns>True if the first planet is larger; otherwise false.</returns>
+    public static bool operator >(Planet a, Planet b)
+    {
+      return a._radius > b._radius;
+    }
+
+    /// <summary>
+    ///   Adds the specified moon to the specified planet.
+    /// </summary>
+    /// <param name="planet">The planet to affect.</param>
+    /// <param name="moon">The moon to add to the Planet's <code>Moons</code></param>
+    /// <returns>Planet <paramref name="planet" /> with Moon <paramref name="moon" /> added.</returns>
+    public static Planet operator +(Planet planet, Moon moon)
+    {
+      planet.Add(moon);
+      return planet;
+    }
+
+    /// <summary>
+    ///   Removes the specified moon from the specified planet.
+    /// </summary>
+    /// <param name="planet">The planet to affect.</param>
+    /// <param name="moon">The moon to remove from the Planet's <code>Moons</code></param>
+    /// <returns>Planet <paramref name="planet" /> with Moon <paramref name="moon" /> removed.</returns>
+    public static Planet operator -(Planet planet, Moon moon)
+    {
+      planet.Remove(moon);
+      return planet;
     }
   }
 }

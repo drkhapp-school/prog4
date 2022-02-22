@@ -4,7 +4,6 @@ namespace atelier4
 {
   public class Moon : IComparable
   {
-    
     /// <summary>
     ///   Represents the equivalent of 1 Earth Mass in <c>kg</c>.
     /// </summary>
@@ -15,17 +14,6 @@ namespace atelier4
     /// </summary>
     private readonly Guid _id;
 
-    /// <summary>
-    ///   Represents the Moon's area in <c>km^2</c>.
-    /// </summary>
-    /// <remarks>A value of -1 means an unknown area, due to an unknown radius.</remarks>
-    private double? _area;
-
-    /// <summary>
-    ///   Represents the Moon's density in <c>g/cm^3</c>.
-    /// </summary>
-    /// <remarks>A value of -1 means an unknown density, due to an unknown mass or radius.</remarks>
-    private double? _density;
 
     /// <summary>
     ///   Represents the Moon's mass in <c>Earth Mass</c>.
@@ -39,12 +27,6 @@ namespace atelier4
     /// </summary>
     /// <remarks>A value of -1 means an unknown radius.</remarks>
     private double? _radius;
-
-    /// <summary>
-    ///   Represents the Moon's volume in <c>km^3</c>.
-    /// </summary>
-    /// <remarks>A value of -1 means an unknown volume, due to an unknown radius.</remarks>
-    private double? _volume;
 
     /// <summary>
     ///   Initializes a new Moon.
@@ -93,9 +75,6 @@ namespace atelier4
             "Radius must be greater than 0km. Use null if you want to clear the radius.");
 
         _radius = value ?? -1;
-        _area = CalculateArea(value);
-        _volume = CalculateVolume(value);
-        _density = CalculateDensity(_mass, value);
       }
     }
 
@@ -110,19 +89,10 @@ namespace atelier4
       get => _mass ?? -1;
       set
       {
-        // Setting the radius to null will clear all properties that require the radius.
-        if (!value.HasValue)
-        {
-          _mass = null;
-          _density = null;
-          return;
-        }
-
         if (value <= 0)
           throw new ArgumentOutOfRangeException(nameof(value), "Mass must be greater than 0ME.");
 
-        _mass = value;
-        if (_radius.HasValue) _density = CalculateDensity((double) value, (double) _radius);
+        _mass = value ?? -1;
       }
     }
 
@@ -130,19 +100,39 @@ namespace atelier4
     ///   Represents the Moon's area in <c>km^2</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown area, due to an unknown radius.</remarks>
-    public double? Area => _area ?? -1;
+    public double? Area => CalculateArea(_radius);
 
     /// <summary>
     ///   Represents the Moon's volume in <c>km^3</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown volume, due to an unknown radius.</remarks>
-    public double? Volume => _volume ?? -1;
+    public double? Volume => CalculateVolume(_radius);
 
     /// <summary>
     ///   Represents the Moon's density in <c>g/cm^3</c>.
     /// </summary>
     /// <remarks>A value of -1 means an unknown density, due to an unknown mass or radius.</remarks>
-    public double? Density => _density ?? -1;
+    public double? Density => CalculateDensity(_mass, _radius);
+
+    /// <summary>
+    ///   <para>
+    ///     Compares the current Moon with another Moon and returns an integer that indicates whether the current Moon
+    ///     precedes, follows, or occurs in the same position in the sort order as the other object.
+    ///   </para>
+    ///   <para>Moons are sorted by their radius.</para>
+    /// </summary>
+    /// <param name="obj"> The Moon to be compared to the current Moon.</param>
+    /// <returns>
+    ///   -1 if the current Moon is smaller;
+    ///   0 if both Moons are equal;
+    ///   1 if the current Moon is bigger;
+    /// </returns>
+    public int CompareTo(object obj)
+    {
+      if (obj == null) return 1;
+      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a Moon to another type of object.");
+      return CompareTo((Moon) obj);
+    }
 
     /// <summary>
     ///   Determines which of two Moons has the largest radius.
@@ -184,23 +174,6 @@ namespace atelier4
     private bool Equals(Moon other)
     {
       return Mass.Equals(other.Mass) && Radius.Equals(other.Radius) && Name.Equals(other.Name);
-    }
-
-    /// <summary>
-    ///   <para>Compares the current Moon with another Moon and returns an integer that indicates whether the current Moon precedes, follows, or occurs in the same position in the sort order as the other object.</para>
-    /// <para>Moons are sorted by their radius.</para>
-    /// </summary>
-    /// <param name="obj"> The Moon to be compared to the current Moon.</param>
-    /// <returns>
-    ///   -1 if the current Moon is smaller;
-    ///   0 if both Moons are equal;
-    ///   1 if the current Moon is bigger;
-    /// </returns>
-    public int CompareTo(object obj)
-    {
-      if (obj == null) return 1;
-      if (obj.GetType() != GetType()) throw new ArgumentException("Cannot compare a Moon to another type of object.");
-      return CompareTo((Moon) obj);
     }
 
     private int CompareTo(Moon value)
