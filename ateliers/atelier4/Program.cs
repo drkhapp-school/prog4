@@ -19,9 +19,9 @@ namespace atelier4
       jupiter += testPlanet;
 
       var badJupiter = jupiter - io;
-
-
       foreach (var moon in badJupiter.Moons) Console.WriteLine(moon);
+      
+      Console.WriteLine("-----");
 
       jupiter.Moons.Sort();
       foreach (var moon in jupiter.Moons) Console.WriteLine(moon);

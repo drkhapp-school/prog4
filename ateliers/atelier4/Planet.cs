@@ -353,5 +353,7 @@ namespace atelier4
       planet.Remove(moon);
       return planet;
     }
+
+    public Moon this[int i] => _moons[i];
   }
 }
