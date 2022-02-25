@@ -25,5 +25,23 @@ namespace atelier5
     {
       _moons = new List<Moon>();
     }
+
+    public Moon this[int i] => _moons[i];
+
+    public IList<Moon> Moons => _moons.AsReadOnly();
+
+    public void Add(params Moon[] moons)
+    {
+      foreach (var moon in moons)
+      {
+        if (_moons.Contains(moon)) continue;
+        _moons.Add(moon);
+      }
+    }
+
+    public void Remove(params Moon[] moons)
+    {
+      foreach (var moon in moons) _moons.Remove(moon);
+    }
   }
 }

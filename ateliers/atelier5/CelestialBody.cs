@@ -10,9 +10,9 @@ namespace atelier5
     private const double EarthMass = 5.9722e27;
 
     /// <summary>
-    /// Represents the name of the celestial body.
+    ///   Represents the equivalent of 1 Solar Mass in <c>Earth Mass</c>.
     /// </summary>
-    private string _name;
+    private const double SolarMass = 333000;
 
     /// <summary>
     ///   Represents the celestial body's mass in <c>Earth Mass</c>.
@@ -20,6 +20,11 @@ namespace atelier5
     /// </summary>
     /// <remarks>A value of 0 means an unknown mass.</remarks>
     private double _mass;
+
+    /// <summary>
+    /// Represents the name of the celestial body.
+    /// </summary>
+    private string _name;
 
     /// <summary>
     ///   Represents the celestial body's radius in <c>km</c>.
@@ -114,16 +119,16 @@ namespace atelier5
     public double Area => CalculateArea(_radius);
 
     /// <summary>
-    ///   Represents the planet's volume in <c>km^3</c>.
+    ///   Represents the celestial body's volume in <c>km^3</c>.
     /// </summary>
     /// <remarks>A value of 0 means an unknown volume, due to an unknown radius.</remarks>
     public double Volume => CalculateVolume(_radius);
 
     /// <summary>
-    ///   Represents the planet's density in <c>g/cm^3</c>.
+    ///   Represents the celestial body's density in <c>g/cm^3</c>.
     /// </summary>
     /// <remarks>A value of 0 means an unknown density, due to an unknown mass or radius.</remarks>
-    public double? Density => CalculateDensity(_mass, _radius);
+    public double Density => CalculateDensity(_mass, _radius);
 
     /// <summary>
     ///   <para>
@@ -197,9 +202,7 @@ namespace atelier5
 
     private int CompareTo(CelestialBody value)
     {
-      if (_radius < value._radius) return -1;
-      if (_radius > value._radius) return 1;
-      return 0;
+      return _radius < value._radius ? -1 : _radius > value._radius ? 1 : 0;
     }
 
     /// <summary>
@@ -223,10 +226,10 @@ namespace atelier5
     }
 
     /// <summary>
-    ///   Calculates the density of a planet.
+    ///   Calculates the density of a celestial body.
     /// </summary>
-    /// <param name="mass">The mass of the planet.</param>
-    /// <param name="radius">The radius of the planet.</param>
+    /// <param name="mass">The mass of the celestial body.</param>
+    /// <param name="radius">The radius of the celestial body.</param>
     /// <returns>Double representing the density, or -1 if any parameter is null.</returns>
     private static double CalculateDensity(double? mass, double? radius)
     {
