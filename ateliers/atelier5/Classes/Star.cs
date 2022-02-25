@@ -1,4 +1,4 @@
-namespace atelier5
+namespace atelier5.Classes
 {
   public class Star : CelestialBodyWithCore
   {

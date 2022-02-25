@@ -1,24 +1,10 @@
 using System;
 
-namespace atelier5
+namespace atelier5.Classes
 {
   public abstract class CelestialBodyWithCore : CelestialBody
   {
     private double _coreSize;
-    public double Core => CalculateCore(Radius, _coreSize);
-
-    public double CoreSize
-    {
-      get => _coreSize;
-      set
-      {
-        if (value < 1 || value >= 100)
-          throw new ArgumentOutOfRangeException(nameof(value),
-            "Core size must range between 0 and 100%.");
-
-        _coreSize = value;
-      }
-    }
 
     protected CelestialBodyWithCore()
     {
@@ -38,6 +24,21 @@ namespace atelier5
     protected CelestialBodyWithCore(string name, double radius, double mass, double coreSize) : base(name, radius, mass)
     {
       CoreSize = coreSize;
+    }
+
+    public double Core => CalculateCore(Radius, _coreSize);
+
+    public double CoreSize
+    {
+      get => _coreSize;
+      set
+      {
+        if (value < 0 || value >= 100)
+          throw new ArgumentOutOfRangeException(nameof(value),
+            "Core size must range between 0 and 100%.");
+
+        _coreSize = value;
+      }
     }
 
     private static double CalculateCore(double radius, double coreSize)

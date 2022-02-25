@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace atelier5
+namespace atelier5.Classes
 {
   public class Galaxy
   {
@@ -42,5 +42,11 @@ namespace atelier5
     }
 
     public SolarSystem this[int i] => _systems[i];
+
+    public void Add(SolarSystem solarSystem)
+    {
+      if (_systems.Contains(solarSystem)) return;
+      _systems.Add(solarSystem);
+    }
   }
 }
