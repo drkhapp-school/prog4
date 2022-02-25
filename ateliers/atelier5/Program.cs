@@ -1,6 +1,4 @@
-﻿using atelier5.Classes;
-
-namespace atelier5
+﻿namespace atelier5
 {
   internal class Program
   {

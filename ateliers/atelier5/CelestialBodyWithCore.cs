@@ -1,6 +1,6 @@
 using System;
 
-namespace atelier5.Classes
+namespace atelier5
 {
   public abstract class CelestialBodyWithCore : CelestialBody
   {

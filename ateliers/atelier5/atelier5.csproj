@@ -39,15 +39,15 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Classes\CelestialBody.cs" />
-        <Compile Include="Classes\CelestialBodyWithCore.cs" />
-        <Compile Include="Classes\Galaxy.cs" />
-        <Compile Include="Classes\Moon.cs" />
-        <Compile Include="Classes\Planet.cs" />
-        <Compile Include="Classes\SolarSystem.cs" />
-        <Compile Include="Classes\Star.cs" />
+        <Compile Include="CelestialBody.cs" />
+        <Compile Include="CelestialBodyWithCore.cs" />
+        <Compile Include="Galaxy.cs" />
+        <Compile Include="Moon.cs" />
+        <Compile Include="Planet.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="SolarSystem.cs" />
+        <Compile Include="Star.cs" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="ClassDiagram.puml" />

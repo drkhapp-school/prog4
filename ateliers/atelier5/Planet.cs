@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace atelier5.Classes
+namespace atelier5
 {
   public class Planet : CelestialBodyWithCore
   {
