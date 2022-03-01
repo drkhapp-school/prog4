@@ -25,11 +25,13 @@ namespace atelier5
     public void Add(params CelestialBodyWithCore[] bodies)
     {
       foreach (var body in bodies)
-        if (body.GetType() == typeof(Star)) Add((Star) body);
-        else if (body.GetType() == typeof(Planet)) Add((Planet) body);
+        if (body.GetType() == typeof(Star)) AddStar(body);
+        else AddBody(body);
     }
 
-    public void Add(Star obj)
+    public IList<CelestialBodyWithCore> Bodies => _bodies.AsReadOnly();
+
+    private void AddStar(CelestialBodyWithCore obj)
     {
       if (_bodies.Contains(obj)) return;
       if (_bodies.FindAll(core => core.GetType() == typeof(Star)).Count >= 3)
@@ -38,7 +40,7 @@ namespace atelier5
       _bodies.Add(obj);
     }
 
-    public void Add(Planet obj)
+    private void AddBody(CelestialBodyWithCore obj)
     {
       if (_bodies.Contains(obj)) return;
 

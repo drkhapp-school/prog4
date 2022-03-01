@@ -4,8 +4,12 @@ namespace atelier5
 {
   public abstract class CelestialBodyWithCore : CelestialBody
   {
+    /// <summary>
+    /// Represents the core's size relative to the celestial body.
+    /// </summary>
     private double _coreSize;
 
+    ///<inheritdoc cref="CelestialBody"/> 
     protected CelestialBodyWithCore()
     {
       CoreSize = 0;
@@ -16,18 +20,34 @@ namespace atelier5
       CoreSize = 0;
     }
 
+    ///<inheritdoc cref="CelestialBody"/> 
     protected CelestialBodyWithCore(string name, double radius, double mass) : base(name, radius, mass)
     {
       CoreSize = 0;
     }
 
+    /// <summary>
+    /// Initializes a new celestial body.
+    /// </summary>
+    /// <param name="name">The name of the celestial body.</param>
+    /// <param name="radius">The radius of the celestial body.</param>
+    /// <param name="mass">The mass of the celestial body.</param>
+    /// <param name="coreSize">The core size of the celestial body.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when a value is lower than 0%, or is greater or equal to 100%.</exception>
     protected CelestialBodyWithCore(string name, double radius, double mass, double coreSize) : base(name, radius, mass)
     {
       CoreSize = coreSize;
     }
 
+    /// <summary>
+    /// Represents the core's radius.
+    /// </summary>
     public double Core => CalculateCore(Radius, _coreSize);
 
+    /// <summary>
+    /// Represents the core's size of the celestial body.
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when a value is lower than 0%, or is greater or equal to 100%.</exception>
     public double CoreSize
     {
       get => _coreSize;
@@ -41,9 +61,20 @@ namespace atelier5
       }
     }
 
+    /// <summary>
+    /// Calculates the radius of the core.
+    /// </summary>
+    /// <param name="radius">The radius of the celestial body.</param>
+    /// <param name="coreSize">The core size's percentage relative to the celestial body.</param>
+    /// <returns>The radius of the core.</returns>
     private static double CalculateCore(double radius, double coreSize)
     {
       return radius * coreSize / 100;
+    }
+
+    public override string ToString()
+    {
+      return base.ToString() + $", Core: {Core}";
     }
   }
 }

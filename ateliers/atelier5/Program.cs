@@ -1,4 +1,6 @@
-﻿namespace atelier5
+﻿using System;
+
+namespace atelier5
 {
   internal class Program
   {
@@ -25,7 +27,7 @@
       var pluto = new Planet("Pluto", 1188.3, 0.00218);
 
       // Moon
-      var moon = new Moon("Moon", 141, 0.2);
+      var moon = new Moon("Moon", 1737.4, 0.0123);
       var europa = new Moon("Europa", 1560.8, 0.008);
       var io = new Moon("Io", 1821.6, 0.015);
       var ganymede = new Moon("Ganymede", 2634.1, 0.413);
@@ -39,6 +41,22 @@
       mars.Add(phobos);
       jupiter.Add(europa, io, ganymede);
       saturn.Add(titan);
+      
+      // Modifications
+      sun.Corona = 4;
+      earth.CoreSize = 20;
+
+      Console.WriteLine("Milky Way:");
+      foreach (var system in milkyWay.Systems)
+      {
+        Console.WriteLine($"- {system}:");
+        foreach (var body in system.Bodies)
+        {
+          Console.WriteLine($"  - {body}:");
+          if (body.GetType() != typeof(Planet)) continue;
+          foreach (var children in ((Planet) body).Moons) Console.WriteLine($"    - {children}");
+        }
+      }
     }
   }
 }

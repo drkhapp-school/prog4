@@ -49,7 +49,7 @@ namespace atelier5
     /// <summary>
     ///   Initializes a new celestial body with an unknown radius and mass.
     /// </summary>
-    /// <param name="name"> the new planet's name.</param>
+    /// <param name="name"> the new celestial body's name.</param>
     protected CelestialBody(string name)
     {
       Name = name;
@@ -68,7 +68,7 @@ namespace atelier5
     }
 
     /// <summary>
-    ///   Represents the planet's name.
+    ///   Represents the celestial body's name.
     /// </summary>
     public string Name
     {
@@ -173,10 +173,10 @@ namespace atelier5
     }
 
     /// <summary>
-    ///   Determines whether the specified planet has the same name, radius and mass as the current planet.
+    ///   Determines whether the specified celestial body has the same name, radius and mass as the current body.
     /// </summary>
-    /// <param name="obj"> The Planet to be compared to the current Planet.</param>
-    /// <returns>True if the Planets have the same name, radius and mass; otherwise, false.</returns>
+    /// <param name="obj"> The bodies to be compared to the current body.</param>
+    /// <returns>True if the bodies have the same name, radius and mass; otherwise, false.</returns>
     public override bool Equals(object obj)
     {
       if (ReferenceEquals(null, obj)) return false;
@@ -231,11 +231,11 @@ namespace atelier5
     /// <param name="mass">The mass of the celestial body.</param>
     /// <param name="radius">The radius of the celestial body.</param>
     /// <returns>Double representing the density, or -1 if any parameter is null.</returns>
-    private static double CalculateDensity(double? mass, double? radius)
+    private static double CalculateDensity(double mass, double radius)
     {
-      return mass.HasValue && radius.HasValue
-        ? (double) mass * EarthMass / CalculateVolume(radius * 1e5)
-        : -1;
+      return mass > 0 && radius > 0
+        ? mass * EarthMass / CalculateVolume(radius * 1e5)
+        : 0;
     }
 
     /// <summary>
@@ -247,13 +247,7 @@ namespace atelier5
     /// </returns>
     public override string ToString()
     {
-      return
-        $"{nameof(Name)}: {Name}, " +
-        $"{nameof(Radius)}: {Radius:N2}km, " +
-        $"{nameof(Mass)}: {Mass:N2}ME, " +
-        $"{nameof(Area)}: {Area:G2}km2, " +
-        $"{nameof(Volume)}: {Volume:G2}km3, " +
-        $"{nameof(Density)}: {Density:F2}g/cm3";
+      return $"{GetType().Name} {Name}, Area: {Area:E2}km2";
     }
   }
 }
