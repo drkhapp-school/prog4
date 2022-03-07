@@ -2,7 +2,7 @@ using System;
 
 namespace atelier5
 {
-  public abstract class CelestialBody : IComparable
+  public abstract class CelestialBody : CelestialObject, IComparable
   {
     /// <summary>
     ///   Represents the equivalent of 1 Earth Mass in <c>kg</c>.
@@ -22,11 +22,6 @@ namespace atelier5
     private double _mass;
 
     /// <summary>
-    /// Represents the name of the celestial body.
-    /// </summary>
-    private string _name;
-
-    /// <summary>
     ///   Represents the celestial body's radius in <c>km</c>.
     /// </summary>
     /// <remarks>A value of 0 means an unknown radius.</remarks>
@@ -39,9 +34,8 @@ namespace atelier5
     /// <param name="radius"> the new celestial body's radius, in km.</param>
     /// <param name="mass"> the new celestial body's mass, in Earth Mass.</param>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> or <c>mass</c> is set to a value lesser than to zero.</exception>
-    protected CelestialBody(string name, double radius, double mass)
+    protected CelestialBody(string name, double radius, double mass): base (name)
     {
-      Name = name;
       Radius = radius;
       Mass = mass;
     }
@@ -50,9 +44,8 @@ namespace atelier5
     ///   Initializes a new celestial body with an unknown radius and mass.
     /// </summary>
     /// <param name="name"> the new celestial body's name.</param>
-    protected CelestialBody(string name)
+    protected CelestialBody(string name) : base(name)
     {
-      Name = name;
       Radius = 0;
       Mass = 0;
     }
@@ -62,18 +55,8 @@ namespace atelier5
     /// </summary>
     protected CelestialBody()
     {
-      Name = "Unknown";
       Radius = 0;
       Mass = 0;
-    }
-
-    /// <summary>
-    ///   Represents the celestial body's name.
-    /// </summary>
-    public string Name
-    {
-      get => _name;
-      set => _name = value;
     }
 
     /// <summary>

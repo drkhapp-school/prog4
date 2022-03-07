@@ -2,13 +2,8 @@ using System.Collections.Generic;
 
 namespace atelier5
 {
-  public class Galaxy
+  public class Galaxy : CelestialObject
   {
-    /// <summary>
-    /// Represents the name of the galaxy.
-    /// </summary>
-    private string _name;
-
     /// <summary>
     /// Represents the type of the galaxy.
     /// </summary>
@@ -24,9 +19,8 @@ namespace atelier5
     /// </summary>
     /// <param name="name">The name of the galaxy.</param>
     /// <param name="type">The type of the galaxy.</param>
-    public Galaxy(string name, string type)
+    public Galaxy(string name, string type): base (name)
     {
-      _name = name;
       _type = type;
       _systems = new List<SolarSystem>();
     }
@@ -35,9 +29,8 @@ namespace atelier5
     /// Initializes a new galaxy with an unknown type.
     /// </summary>
     /// <param name="name">The name of the galaxy.</param>
-    public Galaxy(string name)
+    public Galaxy(string name) : base(name)
     {
-      _name = name;
       _type = "Unknown";
       _systems = new List<SolarSystem>();
     }
@@ -47,18 +40,8 @@ namespace atelier5
     /// </summary>
     public Galaxy()
     {
-      _name = "Unknown";
       _type = "Unknown";
       _systems = new List<SolarSystem>();
-    }
-
-    /// <summary>
-    /// Represents the name of the galaxy.
-    /// </summary>
-    public string Name
-    {
-      get => _name;
-      set => _name = value;
     }
 
     /// <summary>

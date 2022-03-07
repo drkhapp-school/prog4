@@ -3,21 +3,18 @@ using System.Collections.Generic;
 
 namespace atelier5
 {
-  public class SolarSystem
+  public class SolarSystem : CelestialObject
   {
     private List<CelestialBodyWithCore> _bodies;
-    private string _name;
 
-    public SolarSystem(string name)
+    public SolarSystem() 
     {
-      _name = name;
       _bodies = new List<CelestialBodyWithCore>();
     }
-
-    public string Name
+    
+    public SolarSystem(string name) : base(name)
     {
-      get => _name;
-      set => _name = value;
+      _bodies = new List<CelestialBodyWithCore>();
     }
 
     public CelestialBodyWithCore this[int i] => _bodies[i];
