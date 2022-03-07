@@ -26,5 +26,10 @@ namespace atelier5
     {
       _name = name;
     }
+
+    public override string ToString()
+    {
+      return $"{GetType().Name} {Name}";
+    }
   }
 }

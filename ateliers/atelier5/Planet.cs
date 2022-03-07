@@ -4,13 +4,16 @@ namespace atelier5
 {
   public class Planet : CelestialBodyWithCore
   {
+    private SolarSystem _parent;
     private List<Moon> _moons;
 
     /// <summary>
     /// Initializes a new planet with unknown properties.
     /// </summary>
-    public Planet()
+    public Planet(SolarSystem parent)
     {
+      _parent = parent;
+      _parent.Parent.AddCelestialBody(this);
       _moons = new List<Moon>();
     }
 
@@ -18,8 +21,10 @@ namespace atelier5
     /// Initializes a new planet with an unknown radius, mass and core size.
     /// </summary>
     /// <param name="name">The name of the planet.</param>
-    public Planet(string name) : base(name)
+    public Planet(SolarSystem parent, string name) : base(name)
     {
+      _parent = parent;
+      _parent.Parent.AddCelestialBody(this);
       _moons = new List<Moon>();
     }
 
@@ -29,8 +34,10 @@ namespace atelier5
     /// <param name="name">The name of the planet.</param>
     /// <param name="radius">The radius of the planet.</param>
     /// <param name="mass">The mass of the planet.</param>
-    public Planet(string name, double radius, double mass) : base(name, radius, mass)
+    public Planet(SolarSystem parent, string name, double radius, double mass) : base(name, radius, mass)
     {
+      _parent = parent;
+      _parent.Parent.AddCelestialBody(this);
       _moons = new List<Moon>();
     }
 
@@ -41,8 +48,9 @@ namespace atelier5
     /// <param name="radius">The radius of the planet.</param>
     /// <param name="mass">The mass of the planet.</param>
     /// <param name="core">The size of the planet's core.</param>
-    public Planet(string name, double radius, double mass, int core) : base(name, radius, mass, core)
+    public Planet(SolarSystem parent, string name, double radius, double mass, int core) : base(name, radius, mass, core)
     {
+      _parent = parent;
       _moons = new List<Moon>();
     }
 
@@ -79,6 +87,17 @@ namespace atelier5
     public bool Remove(Moon moon)
     {
       return _moons.Remove(moon);
+    }
+
+    public SolarSystem Parent
+    {
+      get => _parent;
+      set
+      {
+        _parent.Remove(this);
+        _parent = value;
+        _parent.Add(this);
+      }
     }
   }
 }

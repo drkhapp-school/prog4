@@ -230,7 +230,7 @@ namespace atelier5
     /// </returns>
     public override string ToString()
     {
-      return $"{GetType().Name} {Name}, Area: {Area:E2}km2";
+      return base.ToString() + $", Area: {Area:E2}km2";
     }
   }
 }

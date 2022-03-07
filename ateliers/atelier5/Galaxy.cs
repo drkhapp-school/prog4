@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace atelier5
 {
@@ -14,6 +15,13 @@ namespace atelier5
     /// </summary>
     private List<SolarSystem> _systems;
 
+    private List<CelestialObject> _celestialObjects;
+
+    public void AddCelestialBody(CelestialObject body)
+    {
+      _celestialObjects.Add(body);
+    }
+
     /// <summary>
     /// Initializes a new galaxy.
     /// </summary>
@@ -23,6 +31,7 @@ namespace atelier5
     {
       _type = type;
       _systems = new List<SolarSystem>();
+      _celestialObjects = new List<CelestialObject>();
     }
 
     /// <summary>
@@ -33,6 +42,7 @@ namespace atelier5
     {
       _type = "Unknown";
       _systems = new List<SolarSystem>();
+      _celestialObjects = new List<CelestialObject>();
     }
 
     /// <summary>
@@ -42,6 +52,7 @@ namespace atelier5
     {
       _type = "Unknown";
       _systems = new List<SolarSystem>();
+      _celestialObjects = new List<CelestialObject>();
     }
 
     /// <summary>
@@ -84,5 +95,10 @@ namespace atelier5
     }
 
     public IList<SolarSystem> Systems => _systems.AsReadOnly();
+
+    public string PrintAll()
+    {
+      return _celestialObjects.Aggregate("", (current, body) => current + (body + "\n"));
+    }
   }
 }
