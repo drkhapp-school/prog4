@@ -33,13 +33,13 @@ namespace atelier5
       var ganymede = new Moon("Ganymede", 2634.1, 0.413, jupiter);
       var titan = new Moon("Titan", 2574.7, 0.0225, saturn);
       var phobos = new Moon("Phobos", 11.2667, 1.784, mars);
-      
+
       // Modifications
       sun.Corona = 4;
       earth.CoreSize = 20;
 
       Console.WriteLine(milkyWay.PrintAll());
-      
+
       // Console.WriteLine("Milky Way:");
       // foreach (var system in milkyWay.Systems)
       // {

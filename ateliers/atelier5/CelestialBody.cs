@@ -33,8 +33,11 @@ namespace atelier5
     /// <param name="name"> the new celestial body's name.</param>
     /// <param name="radius"> the new celestial body's radius, in km.</param>
     /// <param name="mass"> the new celestial body's mass, in Earth Mass.</param>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when <c>radius</c> or <c>mass</c> is set to a value lesser than to zero.</exception>
-    protected CelestialBody(string name, double radius, double mass): base (name)
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///   Thrown when <c>radius</c> or <c>mass</c> is set to a value lesser than to
+    ///   zero.
+    /// </exception>
+    protected CelestialBody(string name, double radius, double mass) : base(name)
     {
       Radius = radius;
       Mass = mass;
@@ -115,8 +118,8 @@ namespace atelier5
 
     /// <summary>
     ///   <para>
-    ///     Compares the current Celestial Body with another Celestial Body and returns an integer that indicates whether the current
-    ///     Celestial Body precedes, follows, or occurs in the same position in the sort order as the other object.
+    ///     Compares the current Celestial Body with another Celestial Body and returns an integer that indicates whether the
+    ///     current Celestial Body precedes, follows, or occurs in the same position in the sort order as the other object.
     ///   </para>
     ///   <para>Celestial Bodies are sorted by their radius.</para>
     /// </summary>
@@ -230,7 +233,8 @@ namespace atelier5
     /// </returns>
     public override string ToString()
     {
-      return base.ToString() + $", Area: {Area:E2}km2";
+      return base.ToString() +
+             $", Radius: {Radius:E2}km, Mass: {Mass:E2}Me, Area: {Area:E2}km2, Volume: {Volume:E2}, Density: {Density:F}g/cm3";
     }
   }
 }

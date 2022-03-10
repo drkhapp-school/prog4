@@ -3,9 +3,9 @@ namespace atelier5
   public class Moon : CelestialBody
   {
     private Planet _parent;
-    
+
     /// <summary>
-    /// Initializes a new moon.
+    ///   Initializes a new moon.
     /// </summary>
     /// <param name="name">The name of the moon.</param>
     /// <param name="radius">The radius of the moon.</param>
@@ -18,7 +18,7 @@ namespace atelier5
     }
 
     /// <summary>
-    /// Initializes a new moon with an unknown radius and mass.
+    ///   Initializes a new moon with an unknown radius and mass.
     /// </summary>
     /// <param name="name">The name of the moon.</param>
     /// <param name="parent">The planet that the moon orbits.</param>
@@ -29,7 +29,7 @@ namespace atelier5
     }
 
     /// <summary>
-    /// Initializes a new moon with an unknown name, radius and mass.
+    ///   Initializes a new moon with an unknown name, radius and mass.
     /// </summary>
     public Moon(Planet parent)
     {

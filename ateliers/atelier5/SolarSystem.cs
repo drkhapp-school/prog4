@@ -14,7 +14,7 @@ namespace atelier5
       _parent.AddCelestialBody(this);
       _bodies = new List<CelestialBodyWithCore>();
     }
-    
+
     public SolarSystem(Galaxy parent, string name) : base(name)
     {
       _parent = parent;
@@ -24,16 +24,25 @@ namespace atelier5
 
     public CelestialBodyWithCore this[int i] => _bodies[i];
 
-    public void Add(params CelestialBodyWithCore[] bodies)
+    public IList<CelestialBodyWithCore> Bodies => _bodies.AsReadOnly();
+
+    public Galaxy Parent
     {
-      foreach (var body in bodies)
+      get => _parent;
+      set
       {
-        if (body.GetType() == typeof(Star)) AddStar(body);
-        else AddBody(body);
+        _parent.Remove(this);
+        _parent = value;
+        _parent.Add(this);
       }
     }
 
-    public IList<CelestialBodyWithCore> Bodies => _bodies.AsReadOnly();
+    public void Add(params CelestialBodyWithCore[] bodies)
+    {
+      foreach (var body in bodies)
+        if (body.GetType() == typeof(Star)) AddStar(body);
+        else AddBody(body);
+    }
 
     private void AddStar(CelestialBodyWithCore obj)
     {
@@ -54,18 +63,6 @@ namespace atelier5
     public void Remove(CelestialBodyWithCore obj)
     {
       _bodies.Remove(obj);
-    }
-
-    public Galaxy Parent
-      
-    {
-      get => _parent;
-      set
-      {
-        _parent.Remove(this);
-        _parent = value;
-        _parent.Add(this);
-      }
     }
   }
 }

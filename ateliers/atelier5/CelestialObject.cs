@@ -2,14 +2,30 @@ namespace atelier5
 {
   public abstract class CelestialObject
   {
-
     /// <summary>
-    /// Represents the name of the celestial body.
+    ///   Represents the name of the celestial object.
     /// </summary>
     private string _name;
-    
+
     /// <summary>
-    ///   Represents the celestial body's name.
+    ///   Initializes a new celestial object with an unknown name.
+    /// </summary>
+    protected CelestialObject()
+    {
+      _name = "Unknown";
+    }
+
+    /// <summary>
+    ///   Initializes a new celestial object.
+    /// </summary>
+    /// <param name="name">The name of the celestial object.</param>
+    protected CelestialObject(string name)
+    {
+      _name = name;
+    }
+
+    /// <summary>
+    ///   Represents the celestial object's name.
     /// </summary>
     public string Name
     {
@@ -17,16 +33,10 @@ namespace atelier5
       set => _name = value;
     }
 
-    protected CelestialObject()
-    {
-      _name = "Unknown";
-    }
-
-    protected CelestialObject(string name)
-    {
-      _name = name;
-    }
-
+    /// <summary>
+    ///   Returns information about the celestial object.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
       return $"{GetType().Name} {Name}";
