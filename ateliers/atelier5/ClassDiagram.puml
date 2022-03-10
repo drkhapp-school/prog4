@@ -1,37 +1,76 @@
 @startuml
+together {
 class Galaxy {
-#Name: string
-#SolarSystems: SolarSystem[]
+-_name : string
+-_systems : List<SolarSystem>
+-_type : string
++Name : string
++Systems : IList<SolarSystem>
++Type : string
++Add() : void
++Remove() : bool
 }
 
 class SolarSystem {
-#Name: string
-#Bodies: List<CelesticalObject>
+-name : string
+-bodies : List<CelestialBodyWithCore>
++Bodies : IList<CelestialBodyWithCore>
++Name : string
++Add() : void
+-AddBody() : void
+-AddStar() : void
++Remove() : void
+}
 }
 
-abstract class CelesticalObject {
-#Name: string
-#Radius: double
-#Mass: double
+abstract class CelestialBody {
+#_mass : double
+#_name : string
+#_radius : double
+#EarthMass : double
+#SolarMass : double
++Area : double
++Density : double
++Mass : double
++Name : string
++Radius: double
++Volume : double
+-CalculateArea() : double
+-CalculateDensity() : double
+-CalculateVolume() : double
++CompareTo() : int
++Equals() : bool
++GetHashCode() : int
++GetLargest() : CelestialBody
++GetMostDense() : CelestialBody
 }
 
-abstract class CelesticalObjectWithCore extends CelesticalObject {
-#Core: int
+abstract class CelestialBodyWithCore extends CelestialBody {
+#_coreSize : double
++Core : double
++CoreSize : double
+-CalculateCore() : double
 }
 
-class Star extends CelesticalObjectWithCore {
-#Crown: int
+together {
+class Star extends CelestialBodyWithCore {
+-_corona : double
++Corona : double
 }
 
-class Planet extends CelesticalObjectWithCore {
-#Moons: Moon[]
+class Planet extends CelestialBodyWithCore {
+-_moons : List<Moon>
++Moons : IList<Moon>
++Add() : void
+-Remove() : bool
 }
 
-class Moon extends CelesticalObject {
+class Moon extends CelestialBody {
+}
 }
 
 Planet "1" *-- "N" Moon
-SolarSystem "1" *-- "N" Planet
-SolarSystem "1" *-- "3" Star
-Galaxy "1" *-- "N" SolarSystem
+SolarSystem "1" *-up- "N" Planet
+SolarSystem "1" *-up- "3" Star
+Galaxy "1" *-left- "N" SolarSystem
 @enduml

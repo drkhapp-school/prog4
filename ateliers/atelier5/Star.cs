@@ -54,7 +54,7 @@ namespace atelier5
       get => _corona;
       set => _corona = value;
     }
-    
+
     public override string ToString()
     {
       return base.ToString() + $", Corona: {Corona}";
