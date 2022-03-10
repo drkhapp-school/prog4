@@ -3,39 +3,23 @@ using System.Collections.Generic;
 
 namespace atelier5
 {
-  public class SolarSystem : CelestialObject
+  public class SolarSystem : Orbitable
   {
     private List<CelestialBodyWithCore> _bodies;
-    private Galaxy _parent;
 
-    public SolarSystem(Galaxy parent)
+    public SolarSystem(Galaxy parent) : base(parent)
     {
-      _parent = parent;
-      _parent.AddCelestialBody(this);
       _bodies = new List<CelestialBodyWithCore>();
     }
 
-    public SolarSystem(Galaxy parent, string name) : base(name)
+    public SolarSystem(CelestialObject parent, string name) : base(parent, name)
     {
-      _parent = parent;
-      _parent.AddCelestialBody(this);
       _bodies = new List<CelestialBodyWithCore>();
     }
 
     public CelestialBodyWithCore this[int i] => _bodies[i];
 
     public IList<CelestialBodyWithCore> Bodies => _bodies.AsReadOnly();
-
-    public Galaxy Parent
-    {
-      get => _parent;
-      set
-      {
-        _parent.Remove(this);
-        _parent = value;
-        _parent.Add(this);
-      }
-    }
 
     public void Add(params CelestialBodyWithCore[] bodies)
     {

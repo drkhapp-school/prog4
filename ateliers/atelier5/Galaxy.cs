@@ -5,7 +5,7 @@ namespace atelier5
 {
   public class Galaxy : CelestialObject
   {
-    private List<CelestialObject> _celestialObjects;
+    private List<Orbitable> _children;
 
     /// <summary>
     ///   Represents the solar systems that are found in the galaxy.
@@ -26,7 +26,7 @@ namespace atelier5
     {
       _type = type;
       _systems = new List<SolarSystem>();
-      _celestialObjects = new List<CelestialObject>();
+      _children = new List<Orbitable>();
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ namespace atelier5
     {
       _type = "Unknown";
       _systems = new List<SolarSystem>();
-      _celestialObjects = new List<CelestialObject>();
+      _children = new List<Orbitable>();
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ namespace atelier5
     {
       _type = "Unknown";
       _systems = new List<SolarSystem>();
-      _celestialObjects = new List<CelestialObject>();
+      _children = new List<Orbitable>();
     }
 
     /// <summary>
@@ -66,11 +66,6 @@ namespace atelier5
     public SolarSystem this[int i] => _systems[i];
 
     public IList<SolarSystem> Systems => _systems.AsReadOnly();
-
-    public void AddCelestialBody(CelestialObject body)
-    {
-      _celestialObjects.Add(body);
-    }
 
     /// <summary>
     ///   Adds a range of solar systems to the galaxy.
@@ -98,7 +93,12 @@ namespace atelier5
 
     public string PrintAll()
     {
-      return _celestialObjects.Aggregate("", (current, body) => current + (body + "\n"));
+      return _children.Aggregate("", (current, body) => current + (body + "\n"));
+    }
+
+    public override void AddCelestialObject(Orbitable child)
+    {
+     _children.Add(child); 
     }
   }
 }

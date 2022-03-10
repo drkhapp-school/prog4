@@ -2,7 +2,7 @@ using System;
 
 namespace atelier5
 {
-  public abstract class CelestialBody : CelestialObject, IComparable
+  public abstract class CelestialBody : Orbitable, IComparable
   {
     /// <summary>
     ///   Represents the equivalent of 1 Earth Mass in <c>kg</c>.
@@ -37,8 +37,9 @@ namespace atelier5
     ///   Thrown when <c>radius</c> or <c>mass</c> is set to a value lesser than to
     ///   zero.
     /// </exception>
-    protected CelestialBody(string name, double radius, double mass) : base(name)
+    protected CelestialBody(CelestialObject parent, string name, double radius, double mass) : base(parent, name)
     {
+      Parent = parent;
       Radius = radius;
       Mass = mass;
     }
@@ -47,7 +48,7 @@ namespace atelier5
     ///   Initializes a new celestial body with an unknown radius and mass.
     /// </summary>
     /// <param name="name"> the new celestial body's name.</param>
-    protected CelestialBody(string name) : base(name)
+    protected CelestialBody(CelestialObject parent, string name) : base(parent, name)
     {
       Radius = 0;
       Mass = 0;
@@ -56,7 +57,7 @@ namespace atelier5
     /// <summary>
     ///   Initializes a new celestial body with an unknown name, radius and mass.
     /// </summary>
-    protected CelestialBody()
+    protected CelestialBody(CelestialObject parent) : base (parent)
     {
       Radius = 0;
       Mass = 0;
@@ -234,7 +235,7 @@ namespace atelier5
     public override string ToString()
     {
       return base.ToString() +
-             $", Radius: {Radius:E2}km, Mass: {Mass:E2}Me, Area: {Area:E2}km2, Volume: {Volume:E2}, Density: {Density:F}g/cm3";
+             $", Radius: {Radius:E2}km, Mass: {Mass:F}Me, Area: {Area:E2}km2, Volume: {Volume:E2}, Density: {Density:F}g/cm3";
     }
   }
 }

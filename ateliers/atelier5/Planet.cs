@@ -5,15 +5,12 @@ namespace atelier5
   public class Planet : CelestialBodyWithCore
   {
     private List<Moon> _moons;
-    private SolarSystem _parent;
 
     /// <summary>
     ///   Initializes a new planet with unknown properties.
     /// </summary>
-    public Planet(SolarSystem parent)
+    public Planet(CelestialObject parent) : base (parent)
     {
-      _parent = parent;
-      _parent.Parent.AddCelestialBody(this);
       _moons = new List<Moon>();
     }
 
@@ -21,10 +18,8 @@ namespace atelier5
     ///   Initializes a new planet with an unknown radius, mass and core size.
     /// </summary>
     /// <param name="name">The name of the planet.</param>
-    public Planet(SolarSystem parent, string name) : base(name)
+    public Planet(CelestialObject parent, string name) : base(parent, name)
     {
-      _parent = parent;
-      _parent.Parent.AddCelestialBody(this);
       _moons = new List<Moon>();
     }
 
@@ -34,10 +29,8 @@ namespace atelier5
     /// <param name="name">The name of the planet.</param>
     /// <param name="radius">The radius of the planet.</param>
     /// <param name="mass">The mass of the planet.</param>
-    public Planet(SolarSystem parent, string name, double radius, double mass) : base(name, radius, mass)
+    public Planet(CelestialObject parent, string name, double radius, double mass) : base(parent, name, radius, mass)
     {
-      _parent = parent;
-      _parent.Parent.AddCelestialBody(this);
       _moons = new List<Moon>();
     }
 
@@ -48,10 +41,9 @@ namespace atelier5
     /// <param name="radius">The radius of the planet.</param>
     /// <param name="mass">The mass of the planet.</param>
     /// <param name="core">The size of the planet's core.</param>
-    public Planet(SolarSystem parent, string name, double radius, double mass, int core) : base(name, radius, mass,
+    public Planet(CelestialObject parent, string name, double radius, double mass, int core) : base(parent, name, radius, mass,
       core)
     {
-      _parent = parent;
       _moons = new List<Moon>();
     }
 
@@ -66,16 +58,6 @@ namespace atelier5
     /// </summary>
     public IList<Moon> Moons => _moons.AsReadOnly();
 
-    public SolarSystem Parent
-    {
-      get => _parent;
-      set
-      {
-        _parent.Remove(this);
-        _parent = value;
-        _parent.Add(this);
-      }
-    }
 
     /// <summary>
     ///   Adds a range of moons to the current planet.

@@ -41,5 +41,7 @@ namespace atelier5
     {
       return $"{GetType().Name} {Name}";
     }
+
+    public abstract void AddCelestialObject(Orbitable child);
   }
 }
