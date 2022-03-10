@@ -70,6 +70,11 @@ class Moon extends CelestialBody {
 }
 
 Planet "1" *-- "N" Moon
+Moon o-- Planet
+Planet o-- SolarSystem
+Star o-- SolarSystem
+Galaxy "1" *-- "N" SolarSystem
+SolarSystem o-- Galaxy
 SolarSystem "1" *-up- "N" Planet
 SolarSystem "1" *-up- "3" Star
 Galaxy "1" *-left- "N" SolarSystem

@@ -41,6 +41,7 @@
     <ItemGroup>
         <Compile Include="CelestialBody.cs"/>
         <Compile Include="CelestialBodyWithCore.cs"/>
+        <Compile Include="CelestialObject.cs"/>
         <Compile Include="Galaxy.cs"/>
         <Compile Include="Moon.cs"/>
         <Compile Include="Planet.cs"/>

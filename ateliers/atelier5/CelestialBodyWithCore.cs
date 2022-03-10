@@ -5,11 +5,11 @@ namespace atelier5
   public abstract class CelestialBodyWithCore : CelestialBody
   {
     /// <summary>
-    /// Represents the core's size relative to the celestial body.
+    ///   Represents the core's size relative to the celestial body.
     /// </summary>
     private double _coreSize;
 
-    ///<inheritdoc cref="CelestialBody"/> 
+    /// <inheritdoc cref="CelestialBody" />
     protected CelestialBodyWithCore()
     {
       CoreSize = 0;
@@ -20,14 +20,14 @@ namespace atelier5
       CoreSize = 0;
     }
 
-    ///<inheritdoc cref="CelestialBody"/> 
+    /// <inheritdoc cref="CelestialBody" />
     protected CelestialBodyWithCore(string name, double radius, double mass) : base(name, radius, mass)
     {
       CoreSize = 0;
     }
 
     /// <summary>
-    /// Initializes a new celestial body.
+    ///   Initializes a new celestial body.
     /// </summary>
     /// <param name="name">The name of the celestial body.</param>
     /// <param name="radius">The radius of the celestial body.</param>
@@ -40,12 +40,12 @@ namespace atelier5
     }
 
     /// <summary>
-    /// Represents the core's radius.
+    ///   Represents the core's radius.
     /// </summary>
     public double Core => CalculateCore(Radius, _coreSize);
 
     /// <summary>
-    /// Represents the core's size of the celestial body.
+    ///   Represents the core's size of the celestial body.
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when a value is lower than 0%, or is greater or equal to 100%.</exception>
     public double CoreSize
@@ -62,7 +62,7 @@ namespace atelier5
     }
 
     /// <summary>
-    /// Calculates the radius of the core.
+    ///   Calculates the radius of the core.
     /// </summary>
     /// <param name="radius">The radius of the celestial body.</param>
     /// <param name="coreSize">The core size's percentage relative to the celestial body.</param>
