@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="atelier5.CelestialBody">
+    <Position X="6.25" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAAIAACgAAAAAEQEgAAAAAABAQAAIIAAAAIAAQCAAQA=</HashCode>
+      <FileName>CelestialBody.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="atelier5.CelestialBodyWithCore">
+    <Position X="7.25" Y="13.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAEJAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CelestialBodyWithCore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.CelestialObject">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAEAAAQAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CelestialObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.Galaxy">
+    <Position X="14.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIQAAAAAAAAAAQADAAQBAAAAAAAAAAAAQAAAABAAAI=</HashCode>
+      <FileName>Galaxy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.Moon">
+    <Position X="4" Y="13.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Moon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.Orbitable">
+    <Position X="8" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQQAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Orbitable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.Planet">
+    <Position X="9" Y="17.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAABAAAAAAAAAAgAAAIAAAAAAA=</HashCode>
+      <FileName>Planet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.Program" Collapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.SolarSystem">
+    <Position X="11.75" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAIAAICAAABgAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>SolarSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="atelier5.Star">
+    <Position X="6.5" Y="17.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Star.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
