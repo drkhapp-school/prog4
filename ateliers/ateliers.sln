@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "atelier4", "atelier4\atelie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "atelier5", "atelier5\atelier5.csproj", "{66CCB23B-0429-4DAA-8CD2-EB32A390CD1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tictactoe", "tictactoe\tictactoe.csproj", "{B28992A1-7C0E-4EF1-B20F-A5E97B1B0EF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{66CCB23B-0429-4DAA-8CD2-EB32A390CD1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CCB23B-0429-4DAA-8CD2-EB32A390CD1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CCB23B-0429-4DAA-8CD2-EB32A390CD1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B28992A1-7C0E-4EF1-B20F-A5E97B1B0EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B28992A1-7C0E-4EF1-B20F-A5E97B1B0EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B28992A1-7C0E-4EF1-B20F-A5E97B1B0EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B28992A1-7C0E-4EF1-B20F-A5E97B1B0EF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
