@@ -1,3 +1,5 @@
+using System;
+
 namespace tictactoe
 {
   public class ViewController
@@ -7,6 +9,11 @@ namespace tictactoe
     public ViewController(TicTacToe main)
     {
       _main = main;
+    }
+
+    internal void DrawCell(int cell, Symbol symbol)
+    {
+      throw new NotImplementedException();
     }
   }
 }

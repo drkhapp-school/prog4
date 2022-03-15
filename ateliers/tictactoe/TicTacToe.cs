@@ -22,6 +22,22 @@ namespace tictactoe
       Application.Run(new FormMatch(new ViewController(new TicTacToe())));
     }
 
+    public void AddCell(GameController instance, int cell, Symbol symbol)
+    {
+      var index = _gameControllers.IndexOf(instance);
+      _viewControllers[index].DrawCell(cell, symbol);
+    }
+
+    public void Victory(GameController gameController)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void Notify(GameController gameController, string v)
+    {
+      throw new NotImplementedException();
+    }
+
     public void StartMatch()
     {
       // Get two players

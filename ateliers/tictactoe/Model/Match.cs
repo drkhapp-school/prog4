@@ -24,7 +24,13 @@ namespace tictactoe
       if (!_grid.IsEmpty(index)) return false;
       
       _grid[index].Symbol = _current.Symbol;
+      _current = _current == _x ? _o : _x;
       return true;
+    }
+
+    public Symbol GetCurrent()
+    {
+      return _current.Symbol;
     }
 
     public bool Victory()
