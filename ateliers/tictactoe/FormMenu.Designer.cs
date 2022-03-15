@@ -1,6 +1,6 @@
 ﻿namespace tictactoe
 {
-  partial class Form1
+  partial class FormMenu
   {
     /// <summary>
     /// Required designer variable.
@@ -35,9 +35,9 @@
       // 
       // BtnStart
       // 
-      this.BtnStart.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+      this.BtnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
       this.BtnStart.BackColor = System.Drawing.Color.White;
-      this.BtnStart.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+      this.BtnStart.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.BtnStart.ForeColor = System.Drawing.Color.Black;
       this.BtnStart.Location = new System.Drawing.Point(12, 202);
       this.BtnStart.MaximumSize = new System.Drawing.Size(277, 64);
@@ -50,9 +50,9 @@
       // 
       // BtnQuit
       // 
-      this.BtnQuit.Anchor = ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+      this.BtnQuit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
       this.BtnQuit.BackColor = System.Drawing.Color.White;
-      this.BtnQuit.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+      this.BtnQuit.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.BtnQuit.ForeColor = System.Drawing.Color.Black;
       this.BtnQuit.Location = new System.Drawing.Point(12, 272);
       this.BtnQuit.MaximumSize = new System.Drawing.Size(277, 64);
@@ -75,7 +75,7 @@
       this.LabTitle.Text = "tic tac toe baby";
       this.LabTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // Form1
+      // FormMenu
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 45F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,11 +85,12 @@
       this.Controls.Add(this.LabTitle);
       this.Controls.Add(this.BtnQuit);
       this.Controls.Add(this.BtnStart);
-      this.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+      this.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.Margin = new System.Windows.Forms.Padding(10, 11, 10, 11);
-      this.Name = "Form1";
-      this.Text = "Form1";
+      this.Name = "FormMenu";
+      this.Text = "FormMenu";
       this.ResumeLayout(false);
+
     }
 
     private System.Windows.Forms.Label LabTitle;

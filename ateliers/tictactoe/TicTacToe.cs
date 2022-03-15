@@ -19,7 +19,7 @@ namespace tictactoe
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new Form1());
+      Application.Run(new FormMatch(new ViewController(new TicTacToe())));
     }
 
     public void StartMatch()

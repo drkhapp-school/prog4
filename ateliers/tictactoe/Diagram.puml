@@ -1,0 +1,79 @@
+@startuml
+
+package "Controller" {
+    class TicTacToe{
+    - _sessionGames : GameController[]
+    - _sessionViews : ViewController[]
+    + StartMatch() : void
+    + EndMatch() : void
+    + ExitApp() : void
+    }
+    class GameController{
+    - _main : TicTacToe
+    - _match : Match
+    + StartMatch() : void
+    + EndMatch() : void
+    + Turn() : void
+    }
+    class ViewController{
+    - _main : TicTacToe
+    - _view : FormSession
+    + GetIndex(int x, int y) : int
+    + CreateForm() : void
+    + Turn() : void
+    + ExitForm() : void
+    }
+}
+
+package "Model" {
+    class Grid{
+      - _cells : Cell[9]
+      + ValidTurn(Symbol value) : bool
+      + GetBox(int index) : Symbol
+    }
+    class Cell {
+     - _symbol : Symbol
+     + Symbol : Symbol
+    }
+    class Match{
+    - _controller : GameController
+    - _turn : Player
+    + Turn() : bool
+    + Won() : bool
+    }
+    class Player extends User {
+    - _symbol : Symbol
+    }
+    enum Symbol{
+    X 
+    O
+    }
+    class User {
+    - _name : string
+    - _points : int
+    }
+    class Leaderboard {
+    - _users : User[];
+    }
+}
+
+package "View" {
+    class "FormMenu" {}
+    class "FormSession" {}
+    class "FormLeaderboard" {}
+}
+
+TicTacToe *-- GameController
+TicTacToe *-- ViewController
+
+Grid  *--  Cell
+GameController *-- Match
+ViewController  *--  FormSession
+ViewController  *--  FormLeaderboard
+TicTacToe  *--  FormMenu
+ViewController o-- Leaderboard
+Leaderboard *-- User
+Match *-- Grid 
+Match  o--  Player
+
+@enduml

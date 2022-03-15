@@ -10,10 +10,13 @@ using System.Windows.Forms;
 
 namespace tictactoe
 {
-  public partial class Form1 : Form
+  public partial class FormMenu : Form
   {
-    public Form1()
+    private ViewController _controller;
+
+    public FormMenu(ViewController controller)
     {
+      _controller = controller;
       InitializeComponent();
     }
     private void BtnStartClick(object sender, EventArgs e)
