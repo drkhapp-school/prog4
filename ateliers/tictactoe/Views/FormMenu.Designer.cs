@@ -1,4 +1,4 @@
-﻿namespace tictactoe
+﻿namespace tictactoe.Views
 {
   partial class FormMenu
   {

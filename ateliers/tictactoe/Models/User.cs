@@ -1,4 +1,4 @@
-namespace tictactoe
+namespace tictactoe.Models
 {
   public class User
   {

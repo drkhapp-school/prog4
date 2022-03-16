@@ -1,12 +1,12 @@
-namespace tictactoe
+namespace tictactoe.Models
 {
-  public class Player : User
+  public class Cell
   {
     private Symbol _symbol;
 
-    public Player(string name, Symbol symbol) : base(name)
+    public Cell()
     {
-      _symbol = symbol;
+      _symbol = Symbol.Empty;
     }
 
     public Symbol Symbol

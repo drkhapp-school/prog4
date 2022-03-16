@@ -1,6 +1,7 @@
 using System.Windows.Forms;
+using tictactoe.Controllers;
 
-namespace tictactoe
+namespace tictactoe.Views
 {
   public partial class FormMatch : Form
   {
@@ -19,7 +20,7 @@ namespace tictactoe
 
     private void BtnQuit_Click(object sender, System.EventArgs e)
     {
-
+      _controller.EndMatch();
     }
 
     private void label2_Click(object sender, System.EventArgs e)

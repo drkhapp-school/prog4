@@ -1,35 +1,36 @@
 @startuml
 
-package "Controller" {
+package "Controllers" {
     class TicTacToe{
+    - _menu : FormMenu
     - _sessionGames : GameController[]
     - _sessionViews : ViewController[]
     + StartMatch() : void
+    + HandleTurn(int index) : void
     + EndMatch() : void
     + ExitApp() : void
     }
-    class GameController{
+    class Controller {
     - _main : TicTacToe
-    - _match : Match
-    + StartMatch() : void
-    + EndMatch() : void
-    + Turn() : void
     }
-    class ViewController{
-    - _main : TicTacToe
+    class GameController extends Controller{
+    - _match : Match
+    - _first : User
+    - _second : User
+    + Turn(int index) : void
+    }
+    class ViewController extends Controller{
     - _view : FormSession
-    + GetIndex(int x, int y) : int
-    + CreateForm() : void
-    + Turn() : void
-    + ExitForm() : void
+    + DrawCell(int cell, Symbol symbol) : void
+    + Turn(int index) : void
+    + EndMatch() : void
     }
 }
 
-package "Model" {
+package "Models" {
     class Grid{
       - _cells : Cell[9]
-      + ValidTurn(Symbol value) : bool
-      + GetBox(int index) : Symbol
+      + IsEmpty(int index) : bool
     }
     class Cell {
      - _symbol : Symbol
@@ -37,9 +38,12 @@ package "Model" {
     }
     class Match{
     - _controller : GameController
-    - _turn : Player
-    + Turn() : bool
-    + Won() : bool
+    - _current : Player
+    - _x : Player
+    - _o : Player
+    + GetCurrent() : Symbol
+    + Turn(int index) : bool
+    + Victory() : bool
     }
     class Player extends User {
     - _symbol : Symbol
@@ -52,28 +56,32 @@ package "Model" {
     - _name : string
     - _points : int
     }
-    class Leaderboard {
-    - _users : User[];
-    }
 }
 
-package "View" {
-    class "FormMenu" {}
-    class "FormSession" {}
-    class "FormLeaderboard" {}
+package "Views" {
+    class "FormMenu" {
+    - _main : TicTacToe
+    + BtnQuitClick() : void
+    + BtnStartClick() : void
+    }
+    class "FormSession" {
+    - _main : TicTacToe
+    + GridClick() : void
+    + BtnQuitClick() : void
+    }
 }
 
 TicTacToe *-- GameController
 TicTacToe *-- ViewController
+TicTacToe  *--  FormMenu
 
+Match *-- Grid 
 Grid  *--  Cell
 GameController *-- Match
 ViewController  *--  FormSession
-ViewController  *--  FormLeaderboard
-TicTacToe  *--  FormMenu
-ViewController o-- Leaderboard
-Leaderboard *-- User
-Match *-- Grid 
-Match  o--  Player
+Controller o-- TicTacToe
+Match o-- Player
+Match o-- Player
+Match o-- Player
 
 @enduml

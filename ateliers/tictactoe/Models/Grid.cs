@@ -1,4 +1,4 @@
-namespace tictactoe
+namespace tictactoe.Models
 {
   public class Grid
   {
@@ -7,9 +7,9 @@ namespace tictactoe
     public Grid()
     {
       _cells = new Cell[9];
-      foreach (var box in _cells)
+      for (int i = 0; i < 8; i++)
       {
-        box.Symbol = Symbol.Empty;
+        _cells[i] = new Cell();
       }
     }
 

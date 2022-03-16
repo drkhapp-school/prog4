@@ -1,6 +1,7 @@
 using System;
+using tictactoe.Controllers;
 
-namespace tictactoe
+namespace tictactoe.Models
 {
   public class Match
   {
