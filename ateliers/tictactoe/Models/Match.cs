@@ -1,5 +1,3 @@
-using System;
-
 namespace tictactoe.Models
 {
   public class Match
@@ -22,8 +20,8 @@ namespace tictactoe.Models
     public bool Turn(int index)
     {
       if (!_grid.IsEmpty(index)) return false;
-      
-      _grid[index].Symbol = _current.Symbol;
+
+      _grid[index] = _current.Symbol;
       _current = _current == _x ? _o : _x;
       return true;
     }
@@ -33,9 +31,22 @@ namespace tictactoe.Models
       return _current.Symbol;
     }
 
-    public bool Victory()
+    public bool InRow(int index)
     {
-      throw new NotImplementedException();
+      var y = index % 3;
+      return _grid[y] == _grid[y + 3] && _grid[y] == _grid[y + 6];
+    }
+
+    public bool InColumn(int index)
+    {
+      var x = index / 3;
+      return _grid[x * 3] == _grid[x * 3 + 1] && _grid[x * 3] == _grid[x * 3 + 2];
+    }
+
+    public bool InDiagonal()
+    {
+      return _grid[0] == _grid[4] && _grid[0] == _grid[8] && _grid[0] != Symbol.Empty ||
+             _grid[6] == _grid[4] && _grid[6] == _grid[2] && _grid[6] != Symbol.Empty;
     }
   }
 }

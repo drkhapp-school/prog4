@@ -8,7 +8,7 @@ namespace tictactoe
     {
       _main = main;
     }
-    
+
     protected TicTacToe Main
     {
       get => _main;

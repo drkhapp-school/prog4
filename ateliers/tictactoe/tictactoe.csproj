@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>tictactoe</RootNamespace>
     <AssemblyName>tictactoe</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -127,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Diagram.puml" />
+    <None Include="Resources\o.png" />
+    <None Include="Resources\x.png" />
     <None Include="Resources\yuki.png" />
     <None Include="Resources\grid.png" />
   </ItemGroup>

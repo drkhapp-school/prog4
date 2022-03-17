@@ -2,7 +2,6 @@ namespace tictactoe.Models
 {
   public class User
   {
-    
     private string _name;
     private uint _points;
 
@@ -17,7 +16,7 @@ namespace tictactoe.Models
       get => _name;
       set => _name = value;
     }
-    
+
     public uint Points
     {
       get => _points;

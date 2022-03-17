@@ -18,12 +18,12 @@ namespace tictactoe
     {
       _gameControllers = new List<GameController>();
       _viewControllers = new List<ViewController>();
-      
+
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      
+
       _menu = new FormMenu(this);
-      
+
       Application.Run(_menu);
     }
 
@@ -36,26 +36,18 @@ namespace tictactoe
       new TicTacToe();
     }
 
-    public void Turn(ViewController instance, int cell)
+    public void Turn(ViewController view, int cell)
     {
-      var index = _viewControllers.IndexOf(instance);
-      _gameControllers[index].Turn(cell);
-    }
+      var game = _gameControllers[_viewControllers.IndexOf(view)];
+      var symbol = game.CurrentTurn();
+      if (!game.Turn(cell))
+        return;
 
-    public void Turn(GameController instance, int cell, Symbol symbol)
-    {
-      var index = _gameControllers.IndexOf(instance);
-      _viewControllers[index].DrawCell(cell, symbol);
-    }
+      view.DrawCell(cell, symbol);
+      if (game.InProgress(cell))
+        return;
 
-    public void Victory(GameController gameController)
-    {
-      throw new NotImplementedException();
-    }
-
-    public void Notify(GameController gameController, string v)
-    {
-      throw new NotImplementedException();
+      view.Victory();
     }
 
     public void StartMatch()

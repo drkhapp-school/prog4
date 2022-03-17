@@ -15,15 +15,12 @@ namespace tictactoe.Views
 
     private void BtnStartClick(object sender, EventArgs e)
     {
-        _main.StartMatch();
+      _main.StartMatch();
     }
 
     private void BtnQuitClick(object sender, EventArgs e)
     {
-      for (int i = 0; i < 254; i++)
-      {
-        _main.StartMatch();
-      }
+      Application.Exit();
     }
   }
 }
