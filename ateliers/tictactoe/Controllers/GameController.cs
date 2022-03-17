@@ -1,6 +1,6 @@
 using tictactoe.Models;
 
-namespace tictactoe.Controllers
+namespace tictactoe
 {
   public class GameController : Controller
   {
@@ -8,7 +8,7 @@ namespace tictactoe.Controllers
     private User _first;
     private User _second;
 
-    public GameController(TicTacToe main, User first, User second): base(main)
+    public GameController(TicTacToe main, User first, User second) : base(main)
     {
       Main = main;
       _match = new Match(this, first, second);
@@ -16,21 +16,14 @@ namespace tictactoe.Controllers
       _second = second;
     }
 
-    public void Turn(int index) {
-      // Ask game to handle turn
-      if (_match.Turn(index)) {
-        // Cell was changed, notify controller
-        Main.AddCell(this, index, _match.GetCurrent());
+    public bool Turn(int index)
+    {
+      return _match.Turn(index);
+    }
 
-        // Ask game to check for victors
-        if (_match.Victory()) {
-          // Victory claimed, notify controller
-          Main.Victory(this);
-        }
-      } else {
-        // Notify controller of an invalid move.
-        Main.Notify(this, "Invalid action.");
-      }
+    public bool Victory()
+    {
+      return _match.Victory();
     }
   }
 }

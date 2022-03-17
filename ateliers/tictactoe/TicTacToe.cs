@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using tictactoe.Controllers;
 using tictactoe.Models;
 using tictactoe.Views;
 
@@ -12,7 +11,9 @@ namespace tictactoe
   public class TicTacToe
   {
     private FormMenu _menu;
-    
+    private List<GameController> _gameControllers;
+    private List<ViewController> _viewControllers;
+
     public TicTacToe()
     {
       _gameControllers = new List<GameController>();
@@ -26,19 +27,22 @@ namespace tictactoe
       Application.Run(_menu);
     }
 
-    private List<GameController> _gameControllers;
-    private List<ViewController> _viewControllers;
-
     /// <summary>
     /// The main entry point for the application.
     /// </summary>
     [STAThread]
     public static void Main()
     {
-      var game = new TicTacToe();
+      new TicTacToe();
     }
 
-    public void AddCell(GameController instance, int cell, Symbol symbol)
+    public void Turn(ViewController instance, int cell)
+    {
+      var index = _viewControllers.IndexOf(instance);
+      _gameControllers[index].Turn(cell);
+    }
+
+    public void Turn(GameController instance, int cell, Symbol symbol)
     {
       var index = _gameControllers.IndexOf(instance);
       _viewControllers[index].DrawCell(cell, symbol);

@@ -1,9 +1,8 @@
 using System;
-using System.Windows.Forms;
 using tictactoe.Models;
 using tictactoe.Views;
 
-namespace tictactoe.Controllers
+namespace tictactoe
 {
   public class ViewController : Controller
   {

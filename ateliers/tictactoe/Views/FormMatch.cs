@@ -1,5 +1,4 @@
 using System.Windows.Forms;
-using tictactoe.Controllers;
 
 namespace tictactoe.Views
 {

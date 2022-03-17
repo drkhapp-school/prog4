@@ -1,4 +1,4 @@
-namespace tictactoe.Controllers
+namespace tictactoe
 {
   public abstract class Controller
   {
