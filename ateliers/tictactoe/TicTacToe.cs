@@ -44,10 +44,12 @@ namespace tictactoe
         return;
 
       view.DrawCell(cell, symbol);
-      if (game.InProgress(cell))
-        return;
-
-      view.Victory();
+      
+      var status = game.Status;
+      if (status == Status.Stalemate)
+        view.Stalemate();
+      else if (status == Status.Ended)
+        view.Victory();
     }
 
     public void StartMatch()

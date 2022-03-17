@@ -2,36 +2,59 @@ using tictactoe.Models;
 
 namespace tictactoe
 {
+  public enum Status
+  {
+    Ongoing,
+    Stalemate,
+    Ended
+  }
+
   public class GameController : Controller
   {
     private Match _match;
-    private bool _progress;
+    private Status _status;
     private User _first;
     private User _second;
 
     public GameController(TicTacToe main, User first, User second) : base(main)
     {
       Main = main;
-      _match = new Match(this, first, second);
+      _match = new Match(this);
+      _status = Status.Ongoing;
       _first = first;
       _second = second;
-      _progress = true;
     }
+
+    public Status Status => _status;
 
     public bool Turn(int index)
     {
-      return _progress ? _match.Turn(index) : false;
+      // Return false if the game is over
+      if (_status != Status.Ongoing) return false;
+      // Run move, return false if it's invalid
+      if (!_match.Turn(index)) return false;
+
+      // Checks
+      CheckStalemate();
+      CheckVictory(index);
+      return true;
     }
 
-    public bool InProgress(int index)
+    public void CheckStalemate()
     {
-      _progress = !_match.InColumn(index) && !_match.InRow(index) && !_match.InDiagonal();
-      return _progress;
+      if (_status == Status.Ongoing && _match.FullGrid())
+        _status = Status.Stalemate;
+    }
+
+    public void CheckVictory(int index)
+    {
+      if (_status == Status.Ongoing && _match.InRow(index) && _match.InColumn(index) && _match.InDiagonal())
+        _status = Status.Ended;
     }
 
     public Symbol CurrentTurn()
     {
-      return _match.GetCurrent();
+      return _match.Current;
     }
   }
 }

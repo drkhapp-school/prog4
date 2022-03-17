@@ -3,17 +3,13 @@ namespace tictactoe.Models
   public class Match
   {
     private GameController _controller;
-    private Player _current;
-    private Player _x;
-    private Player _o;
+    private Symbol _current;
     private Grid _grid;
 
-    public Match(GameController controller, User x, User o)
+    public Match(GameController controller)
     {
       _controller = controller;
-      _x = new Player(x.Name, Symbol.X);
-      _o = new Player(o.Name, Symbol.O);
-      _current = _x;
+      _current = Symbol.X;
       _grid = new Grid();
     }
 
@@ -21,15 +17,21 @@ namespace tictactoe.Models
     {
       if (!_grid.IsEmpty(index)) return false;
 
-      _grid[index] = _current.Symbol;
-      _current = _current == _x ? _o : _x;
+      _grid[index] = _current;
+      _current = _current == Symbol.X ? Symbol.X : Symbol.O;
+      return true;
+    }
+    
+    public bool FullGrid()
+    {
+      foreach (var cell in _grid.Cells)
+        if (cell.Symbol == Symbol.Empty)
+          return false;
+
       return true;
     }
 
-    public Symbol GetCurrent()
-    {
-      return _current.Symbol;
-    }
+    public Symbol Current => _current;
 
     public bool InRow(int index)
     {

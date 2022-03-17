@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="tictactoe.Controller">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAA=</HashCode>
+      <FileName>Controllers\Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_main" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tictactoe.GameController">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAFAAgAAAAEAAQCAAgAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Controllers\GameController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_match" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tictactoe.ViewController">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAgAQgAAAAEAAAABAA=</HashCode>
+      <FileName>Controllers\ViewController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tictactoe.TicTacToe">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAACAAAAAAAEAQAAAAAABCAAACA=</HashCode>
+      <FileName>TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_menu" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_gameControllers" />
+      <Field Name="_viewControllers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tictactoe.Models.Cell">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tictactoe.Models.Grid">
+    <Position X="3.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAABCAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Grid.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_cells" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="tictactoe.Models.Match">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACCAAAAAAgAAAAICCAAAAAABAAAAAAAAABEAAAAA=</HashCode>
+      <FileName>Models\Match.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_grid" />
+      <Field Name="_controller" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tictactoe.Models.Player" Collapsed="true">
+    <Position X="14.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tictactoe.Models.User" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAgAAAgAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tictactoe.Properties.Resources" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAABEAAAAQAAAAAICABAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tictactoe.Properties.Settings" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tictactoe.Views.FormMatch">
+    <Position X="14.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAoQARCAAAAAAAACAgAACAABAAAAAAAAEAEAAAAA=</HashCode>
+      <FileName>Views\FormMatch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_controller" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="tictactoe.Views.FormMenu">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAQCAAAAACAACAAAACAAAgAAAAAAACgAAAAAA=</HashCode>
+      <FileName>Views\FormMenu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_main" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="tictactoe.Models.Symbol" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAgAQAA=</HashCode>
+      <FileName>Models\Symbol.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -36,5 +36,10 @@ namespace tictactoe
     {
       MessageBox.Show("YOU WON BITCH");
     }
+
+    public void Stalemate()
+    {
+      MessageBox.Show("TIE DUMBASS");
+    }
   }
 }
