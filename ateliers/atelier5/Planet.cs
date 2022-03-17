@@ -9,7 +9,7 @@ namespace atelier5
     /// <summary>
     ///   Initializes a new planet with unknown properties.
     /// </summary>
-    public Planet(CelestialObject parent) : base (parent)
+    public Planet(CelestialObject parent) : base(parent)
     {
       _moons = new List<Moon>();
     }
@@ -41,7 +41,8 @@ namespace atelier5
     /// <param name="radius">The radius of the planet.</param>
     /// <param name="mass">The mass of the planet.</param>
     /// <param name="core">The size of the planet's core.</param>
-    public Planet(CelestialObject parent, string name, double radius, double mass, int core) : base(parent, name, radius, mass,
+    public Planet(CelestialObject parent, string name, double radius, double mass, int core) : base(parent, name,
+      radius, mass,
       core)
     {
       _moons = new List<Moon>();

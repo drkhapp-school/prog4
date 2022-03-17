@@ -24,10 +24,7 @@ namespace atelier5
     public CelestialObject Parent
     {
       get => _parent;
-      set
-      {
-        _parent = value;
-      }
+      set => _parent = value;
     }
   }
 }

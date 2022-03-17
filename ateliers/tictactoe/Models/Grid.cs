@@ -7,10 +7,7 @@ namespace tictactoe.Models
     public Grid()
     {
       _cells = new Cell[9];
-      for (int i = 0; i < 9; i++)
-      {
-        _cells[i] = new Cell();
-      }
+      for (var i = 0; i < 9; i++) _cells[i] = new Cell();
     }
 
     public Cell[] Cells => _cells;
@@ -20,7 +17,7 @@ namespace tictactoe.Models
       get => _cells[i].Symbol;
       set => _cells[i].Symbol = value;
     }
-    
+
     public Cell this[int i, int j]
     {
       get => _cells[i + j % 3];

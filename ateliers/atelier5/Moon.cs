@@ -25,7 +25,7 @@ namespace atelier5
     /// <summary>
     ///   Initializes a new moon with an unknown name, radius and mass.
     /// </summary>
-    public Moon(CelestialObject parent) : base (parent)
+    public Moon(CelestialObject parent) : base(parent)
     {
     }
   }

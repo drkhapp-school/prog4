@@ -98,7 +98,7 @@ namespace atelier5
 
     public override void AddCelestialObject(Orbitable child)
     {
-     _children.Add(child); 
+      _children.Add(child);
     }
   }
 }

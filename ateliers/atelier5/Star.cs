@@ -7,7 +7,7 @@ namespace atelier5
     /// <summary>
     ///   Initializes a new star with unknown properties.
     /// </summary>
-    public Star(CelestialObject parent) : base (parent)
+    public Star(CelestialObject parent) : base(parent)
     {
       _corona = 0;
     }
@@ -40,7 +40,8 @@ namespace atelier5
     /// <param name="mass">The mass of the star.</param>
     /// <param name="coreSize">The core size of the star.</param>
     /// <param name="corona">The corona of the star.</param>
-    public Star(CelestialObject parent, string name, double radius, double mass, double coreSize, double corona) : base(parent,
+    public Star(CelestialObject parent, string name, double radius, double mass, double coreSize, double corona) : base(
+      parent,
       name, radius, mass,
       coreSize)
     {

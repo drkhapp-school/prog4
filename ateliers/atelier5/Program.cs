@@ -33,9 +33,9 @@ namespace atelier5
       var moon = new Moon(earth, "Moon", 1737.4, 0.0123);
       var europa = new Moon(jupiter, "Europa", 1560.8, 0.008);
       var io = new Moon(jupiter, "Io", 1821.6, 0.015);
-      var ganymede = new Moon(jupiter,"Ganymede", 2634.1, 0.413);
-      var titan = new Moon(saturn,"Titan", 2574.7, 0.0225);
-      var phobos = new Moon(mars,"Phobos", 11.2667, 1.784);
+      var ganymede = new Moon(jupiter, "Ganymede", 2634.1, 0.413);
+      var titan = new Moon(saturn, "Titan", 2574.7, 0.0225);
+      var phobos = new Moon(mars, "Phobos", 11.2667, 1.784);
 
       // Modifications
       sun.Corona = 4;

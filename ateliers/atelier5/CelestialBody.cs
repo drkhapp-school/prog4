@@ -57,7 +57,7 @@ namespace atelier5
     /// <summary>
     ///   Initializes a new celestial body with an unknown name, radius and mass.
     /// </summary>
-    protected CelestialBody(CelestialObject parent) : base (parent)
+    protected CelestialBody(CelestialObject parent) : base(parent)
     {
       Radius = 0;
       Mass = 0;

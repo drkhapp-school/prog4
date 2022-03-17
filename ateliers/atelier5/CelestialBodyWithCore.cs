@@ -10,7 +10,7 @@ namespace atelier5
     private double _coreSize;
 
     /// <inheritdoc cref="CelestialBody" />
-    protected CelestialBodyWithCore(CelestialObject parent) : base (parent)
+    protected CelestialBodyWithCore(CelestialObject parent) : base(parent)
     {
       CoreSize = 0;
     }
@@ -21,7 +21,8 @@ namespace atelier5
     }
 
     /// <inheritdoc cref="CelestialBody" />
-    protected CelestialBodyWithCore(CelestialObject parent, string name, double radius, double mass) : base(parent, name, radius, mass)
+    protected CelestialBodyWithCore(CelestialObject parent, string name, double radius, double mass) : base(parent,
+      name, radius, mass)
     {
       CoreSize = 0;
     }
@@ -34,7 +35,8 @@ namespace atelier5
     /// <param name="mass">The mass of the celestial body.</param>
     /// <param name="coreSize">The core size of the celestial body.</param>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when a value is lower than 0%, or is greater or equal to 100%.</exception>
-    protected CelestialBodyWithCore(CelestialObject parent, string name, double radius, double mass, double coreSize) : base(parent, name, radius, mass)
+    protected CelestialBodyWithCore(CelestialObject parent, string name, double radius, double mass, double coreSize) :
+      base(parent, name, radius, mass)
     {
       CoreSize = coreSize;
     }
